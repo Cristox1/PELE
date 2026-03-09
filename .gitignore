@@ -1,0 +1,15 @@
+# Ignorar todo por defecto
+*
+
+# Exceptuar (permitir) los archivos específicos del proyecto
+!LenguajeDL.g4
+!demo_visitor.py
+!main.py
+!README.md
+!.gitignore
+
+# Ignorar carpetas de sistema y entorno (por si acaso)
+env/
+__pycache__/
+.antlr/
+.vscode/

@@ -1,13 +1,10 @@
-# Cambiamos las importaciones a los nuevos archivos generados
 from LenguajeDLVisitor import LenguajeDLVisitor
 from LenguajeDLParser import LenguajeDLParser
 
-# Heredamos del nuevo Visitor generado
 class EvalVisitor(LenguajeDLVisitor):
     def __init__(self):
         self.memory = {}
 
-    # Actualizamos todas las referencias a LenguajeDLParser
     def visitProgram(self, ctx: LenguajeDLParser.ProgramContext):
         for stmt in ctx.statement():
             self.visit(stmt)
@@ -27,23 +24,69 @@ class EvalVisitor(LenguajeDLVisitor):
     def visitExprStmt(self, ctx: LenguajeDLParser.ExprStmtContext):
         return self.visit(ctx.expr())
 
-    def visitMulDivExpr(self, ctx: LenguajeDLParser.MulDivExprContext):
+    # --- Operaciones aritméticas ---
+    def visitPowExpr(self, ctx: LenguajeDLParser.PowExprContext):
         left = self.visit(ctx.expr(0))
         right = self.visit(ctx.expr(1))
-        if ctx.op.type == LenguajeDLParser.MUL:
+        return left ** right
+
+    def visitMulDivModExpr(self, ctx: LenguajeDLParser.MulDivModExprContext):
+        left = self.visit(ctx.expr(0))
+        right = self.visit(ctx.expr(1))
+        op = ctx.op.text
+        if op == '*':
             return left * right
-        return left / right
+        elif op == '/':
+            if right == 0:
+                raise Exception("Error: División por cero.")
+            return left / right
+        elif op == '%':
+            return left % right
 
     def visitAddSubExpr(self, ctx: LenguajeDLParser.AddSubExprContext):
         left = self.visit(ctx.expr(0))
         right = self.visit(ctx.expr(1))
-        if ctx.op.type == LenguajeDLParser.ADD:
+        if ctx.op.text == '+':
             return left + right
         return left - right
 
+    def visitUnaryMinusExpr(self, ctx: LenguajeDLParser.UnaryMinusExprContext):
+        return -self.visit(ctx.expr())
+
+    # --- Comparaciones ---
+    def visitCompareExpr(self, ctx: LenguajeDLParser.CompareExprContext):
+        left = self.visit(ctx.expr(0))
+        right = self.visit(ctx.expr(1))
+        op = ctx.op.text
+        if op == '<':   return left < right
+        if op == '<=':  return left <= right
+        if op == '>':   return left > right
+        if op == '>=':  return left >= right
+        if op == '==':  return left == right
+        if op == '!=':  return left != right
+
+    # --- Lógica booleana ---
+    def visitLogicExpr(self, ctx: LenguajeDLParser.LogicExprContext):
+        left = self.visit(ctx.expr(0))
+        right = self.visit(ctx.expr(1))
+        if ctx.op.text == 'and':
+            return left and right
+        return left or right
+
+    def visitNotExpr(self, ctx: LenguajeDLParser.NotExprContext):
+        return not self.visit(ctx.expr())
+
+    def visitTrueExpr(self, ctx: LenguajeDLParser.TrueExprContext):
+        return True
+
+    def visitFalseExpr(self, ctx: LenguajeDLParser.FalseExprContext):
+        return False
+
+    # --- Estructuras de datos ---
     def visitArrayExpr(self, ctx: LenguajeDLParser.ArrayExprContext):
         return [self.visit(expr) for expr in ctx.expr()]
 
+    # --- Literales y variables ---
     def visitIntExpr(self, ctx: LenguajeDLParser.IntExprContext):
         return int(ctx.getText())
 
