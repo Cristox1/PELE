@@ -6,11 +6,12 @@ Este repositorio contiene la primera fase del desarrollo de un lenguaje de progr
 
 En esta primera entrega de avance, el lenguaje soporta las siguientes caracteristicas fundamentales:
 
-*   **Tipos de datos numericos:** Soporte nativo para numeros enteros (INT) y de punto flotante (FLOAT), esenciales para el futuro manejo de hiperparametros, pesos y sesgos.
+*   **Tipos de datos:** Soporte nativo para numeros enteros (INT), de punto flotante (FLOAT), valores booleanos (true, false) y cadenas de texto (Strings).
 *   **Estructuras de datos basicas:** Soporte para arreglos (listas) de una dimension, sentando las bases para futuros tensores o matrices.
 *   **Asignacion de variables:** Capacidad de almacenar y recuperar valores en memoria durante la ejecucion del programa.
-*   **Operaciones aritmeticas:** Suma, resta, multiplicacion, division y soporte para numeros negativos (menos unario), respetando la precedencia de operadores.
-*   **Control de flujo basico:** Sentencias delimitadas por punto y coma (;) y funcion nativa de impresion (print).
+*   **Operaciones aritmeticas extendidas:** Suma (+), resta (-), multiplicacion (*), division (/), modulo (%) y potencia (**). Incluye soporte para numeros negativos (menos unario) respetando estrictamente la precedencia de operadores.
+*   **Operadores relacionales:** Capacidad de comparar expresiones y variables utilizando los operadores <, <=, >, >=, == y !=.
+*   **Control de flujo basico:** Sentencias delimitadas por punto y coma (;) y funcion nativa de impresion en consola mediante la instruccion `mostrar()`.
 
 ## Estructura del Proyecto
 
@@ -70,18 +71,27 @@ Cada vez que se realicen modificaciones estructurales en el archivo de gramatica
 El archivo `main.py` procesa internamente un bloque de codigo escrito en LenguajeDL similar a este:
 
 ```text
-// Configuracion de variables
-variable_1 = 100;
-variable_2 = 50;
+// Cadenas de texto
+saludo = "Hola, bienvenido a LenguajeDL";
 
-// Probabilidades y pesos (soporte para flotantes y negativos)
-probabilidades = [0.5, -0.2, 0.1];
+// Tipos de datos numericos y booleanos
+epocas = 100;
+learning_rate = 0.05;
+entrenamiento_activo = true;
 
-// Calculo con variables
-variable_1_n = variable_1 * 2.5;
+// Estructuras tipo Tensor (Arreglos)
+pesos = [0.1, -0.5, 0.8];
 
-print(variable_1);
-print(probabilidades);
-print(variable_1_n);
+// Operaciones aritmeticas extendidas
+calculo_potencia = 2 ** 3;
+calculo_modulo = 10 % 3;
+
+// Operadores relacionales
+es_mayor = epocas > 50;
+
+// Salida de datos en consola
+mostrar(saludo);
+mostrar(pesos);
+mostrar(calculo_potencia);
+mostrar(es_mayor);
 ```
-# LenguajeDL

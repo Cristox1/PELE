@@ -1,34 +1,40 @@
 import sys
 from antlr4 import *
-# Importamos los nuevos archivos generados
 from LenguajeDLLexer import LenguajeDLLexer
 from LenguajeDLParser import LenguajeDLParser
-# Importamos tu clase EvalVisitor desde tu nuevo archivo demo_visitor.py
 from demo_visitor import EvalVisitor
 
 def main():
     code = """
-    // Configuración variables
-    variable_1 = 100;
-    variable_2 = 50;
+    // --- Pruebas de Strings ---
+    saludo = "Hola, bienvenido a LenguajeDL";
+    modelo = "Red Neuronal";
     
-    // Probabilidades (¡ahora ya entiende los negativos!)
-    probabilidades = [0.5, -0.2, 0.1];
+    // --- Pruebas de Datos Basicos ---
+    epocas = 100;
+    learning_rate = 0.05;
+    entrenamiento_activo = true;
     
-    // Un cálculo simple
-    variable_1_n = variable_1 * 2.5;
+    // --- Pruebas de Tensores (Arreglos) ---
+    pesos = [0.1, -0.5, 0.8];
     
-    print(variable_1);
-    print(probabilidades);
-    print(variable_1_n);
+    // --- Pruebas Matematicas ---
+    calculo_potencia = 2 ** 3;
+    calculo_modulo = 10 % 3;
+    
+    // --- Mostrar Resultados ---
+    mostrar(saludo);
+    mostrar(modelo);
+    mostrar(epocas);
+    mostrar(entrenamiento_activo);
+    mostrar(pesos);
+    mostrar(calculo_potencia);
+    mostrar(calculo_modulo);
     """
 
     input_stream = InputStream(code)
-    
-    # Instanciamos el Lexer y Parser con los nuevos nombres
     lexer = LenguajeDLLexer(input_stream)
     stream = CommonTokenStream(lexer)
-    
     parser = LenguajeDLParser(stream)
     tree = parser.program()
     

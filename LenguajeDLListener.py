@@ -35,12 +35,12 @@ class LenguajeDLListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by LenguajeDLParser#printStmt.
-    def enterPrintStmt(self, ctx:LenguajeDLParser.PrintStmtContext):
+    # Enter a parse tree produced by LenguajeDLParser#mostrarStmt.
+    def enterMostrarStmt(self, ctx:LenguajeDLParser.MostrarStmtContext):
         pass
 
-    # Exit a parse tree produced by LenguajeDLParser#printStmt.
-    def exitPrintStmt(self, ctx:LenguajeDLParser.PrintStmtContext):
+    # Exit a parse tree produced by LenguajeDLParser#mostrarStmt.
+    def exitMostrarStmt(self, ctx:LenguajeDLParser.MostrarStmtContext):
         pass
 
 
@@ -50,6 +50,33 @@ class LenguajeDLListener(ParseTreeListener):
 
     # Exit a parse tree produced by LenguajeDLParser#assignment.
     def exitAssignment(self, ctx:LenguajeDLParser.AssignmentContext):
+        pass
+
+
+    # Enter a parse tree produced by LenguajeDLParser#BoolExpr.
+    def enterBoolExpr(self, ctx:LenguajeDLParser.BoolExprContext):
+        pass
+
+    # Exit a parse tree produced by LenguajeDLParser#BoolExpr.
+    def exitBoolExpr(self, ctx:LenguajeDLParser.BoolExprContext):
+        pass
+
+
+    # Enter a parse tree produced by LenguajeDLParser#StringExpr.
+    def enterStringExpr(self, ctx:LenguajeDLParser.StringExprContext):
+        pass
+
+    # Exit a parse tree produced by LenguajeDLParser#StringExpr.
+    def exitStringExpr(self, ctx:LenguajeDLParser.StringExprContext):
+        pass
+
+
+    # Enter a parse tree produced by LenguajeDLParser#PowerExpr.
+    def enterPowerExpr(self, ctx:LenguajeDLParser.PowerExprContext):
+        pass
+
+    # Exit a parse tree produced by LenguajeDLParser#PowerExpr.
+    def exitPowerExpr(self, ctx:LenguajeDLParser.PowerExprContext):
         pass
 
 
@@ -71,21 +98,21 @@ class LenguajeDLListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by LenguajeDLParser#MulDivExpr.
-    def enterMulDivExpr(self, ctx:LenguajeDLParser.MulDivExprContext):
-        pass
-
-    # Exit a parse tree produced by LenguajeDLParser#MulDivExpr.
-    def exitMulDivExpr(self, ctx:LenguajeDLParser.MulDivExprContext):
-        pass
-
-
     # Enter a parse tree produced by LenguajeDLParser#IdExpr.
     def enterIdExpr(self, ctx:LenguajeDLParser.IdExprContext):
         pass
 
     # Exit a parse tree produced by LenguajeDLParser#IdExpr.
     def exitIdExpr(self, ctx:LenguajeDLParser.IdExprContext):
+        pass
+
+
+    # Enter a parse tree produced by LenguajeDLParser#MulDivModExpr.
+    def enterMulDivModExpr(self, ctx:LenguajeDLParser.MulDivModExprContext):
+        pass
+
+    # Exit a parse tree produced by LenguajeDLParser#MulDivModExpr.
+    def exitMulDivModExpr(self, ctx:LenguajeDLParser.MulDivModExprContext):
         pass
 
 
@@ -104,6 +131,15 @@ class LenguajeDLListener(ParseTreeListener):
 
     # Exit a parse tree produced by LenguajeDLParser#IntExpr.
     def exitIntExpr(self, ctx:LenguajeDLParser.IntExprContext):
+        pass
+
+
+    # Enter a parse tree produced by LenguajeDLParser#RelationalExpr.
+    def enterRelationalExpr(self, ctx:LenguajeDLParser.RelationalExprContext):
+        pass
+
+    # Exit a parse tree produced by LenguajeDLParser#RelationalExpr.
+    def exitRelationalExpr(self, ctx:LenguajeDLParser.RelationalExprContext):
         pass
 
 

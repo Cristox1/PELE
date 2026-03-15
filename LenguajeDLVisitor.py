@@ -24,13 +24,28 @@ class LenguajeDLVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by LenguajeDLParser#printStmt.
-    def visitPrintStmt(self, ctx:LenguajeDLParser.PrintStmtContext):
+    # Visit a parse tree produced by LenguajeDLParser#mostrarStmt.
+    def visitMostrarStmt(self, ctx:LenguajeDLParser.MostrarStmtContext):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by LenguajeDLParser#assignment.
     def visitAssignment(self, ctx:LenguajeDLParser.AssignmentContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by LenguajeDLParser#BoolExpr.
+    def visitBoolExpr(self, ctx:LenguajeDLParser.BoolExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by LenguajeDLParser#StringExpr.
+    def visitStringExpr(self, ctx:LenguajeDLParser.StringExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by LenguajeDLParser#PowerExpr.
+    def visitPowerExpr(self, ctx:LenguajeDLParser.PowerExprContext):
         return self.visitChildren(ctx)
 
 
@@ -44,13 +59,13 @@ class LenguajeDLVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by LenguajeDLParser#MulDivExpr.
-    def visitMulDivExpr(self, ctx:LenguajeDLParser.MulDivExprContext):
+    # Visit a parse tree produced by LenguajeDLParser#IdExpr.
+    def visitIdExpr(self, ctx:LenguajeDLParser.IdExprContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by LenguajeDLParser#IdExpr.
-    def visitIdExpr(self, ctx:LenguajeDLParser.IdExprContext):
+    # Visit a parse tree produced by LenguajeDLParser#MulDivModExpr.
+    def visitMulDivModExpr(self, ctx:LenguajeDLParser.MulDivModExprContext):
         return self.visitChildren(ctx)
 
 
@@ -61,6 +76,11 @@ class LenguajeDLVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by LenguajeDLParser#IntExpr.
     def visitIntExpr(self, ctx:LenguajeDLParser.IntExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by LenguajeDLParser#RelationalExpr.
+    def visitRelationalExpr(self, ctx:LenguajeDLParser.RelationalExprContext):
         return self.visitChildren(ctx)
 
 

@@ -1,30 +1,35 @@
-grammar LenguajeDL; // <-- ¡ESTO DEBE COINCIDIR CON EL NOMBRE DEL ARCHIVO!
+grammar LenguajeDL;
 
 // --- REGLAS SINTÁCTICAS (PARSER) ---
 program: statement+ EOF ;
 
-statement: assignment ';'       # assignStmt
-         | expr ';'             # exprStmt
-         | 'print' '(' expr ')' ';' # printStmt
+statement: assignment ';'             # assignStmt
+         | expr ';'                   # exprStmt
+         | 'mostrar' '(' expr ')' ';' # mostrarStmt
          ;
 
 assignment: ID '=' expr ;
 
-expr: '-' expr                  # UnaryMinusExpr  
-    | expr op=('*'|'/') expr    # MulDivExpr
-    | expr op=('+'|'-') expr    # AddSubExpr
-    | '[' expr (',' expr)* ']'  # ArrayExpr
-    | INT                       # IntExpr
-    | FLOAT                     # FloatExpr
-    | ID                        # IdExpr
-    | '(' expr ')'              # ParensExpr
+expr: '-' expr                                # UnaryMinusExpr
+    | expr op='**' expr                       # PowerExpr
+    | expr op=('*'|'/'|'%') expr              # MulDivModExpr
+    | expr op=('+'|'-') expr                  # AddSubExpr
+    | expr op=('<'|'<='|'>'|'>='|'=='|'!=') expr # RelationalExpr
+    | '[' expr (',' expr)* ']'                # ArrayExpr
+    | TRUE                                    # BoolExpr
+    | FALSE                                   # BoolExpr
+    | STRING                                  # StringExpr     // <-- NUEVO: Soporte para Strings
+    | INT                                     # IntExpr
+    | FLOAT                                   # FloatExpr
+    | ID                                      # IdExpr
+    | '(' expr ')'                            # ParensExpr
     ;
 
 // --- REGLAS LÉXICAS (LEXER) ---
-MUL : '*' ;
-DIV : '/' ;
-ADD : '+' ;
-SUB : '-' ;
+TRUE  : 'true' ;
+FALSE : 'false' ;
+
+STRING: '"' ~'"'* '"' ; // <-- NUEVO: Reconoce cualquier cosa entre comillas dobles
 
 ID    : [a-zA-Z_][a-zA-Z0-9_]* ;
 FLOAT : [0-9]+ '.' [0-9]+ ;
