@@ -1,6 +1,6 @@
 grammar LenguajeDL;
 
-// --- REGLAS SINTÁCTICAS (PARSER) ---
+// REGLAS SINTÁCTICAS (PARSER)
 program: statement+ EOF ;
 
 statement: assignment ';'             # assignStmt
@@ -18,22 +18,22 @@ expr: '-' expr                                # UnaryMinusExpr
     | '[' expr (',' expr)* ']'                # ArrayExpr
     | TRUE                                    # BoolExpr
     | FALSE                                   # BoolExpr
-    | STRING                                  # StringExpr     // <-- NUEVO: Soporte para Strings
+    | STRING                                  # StringExpr     
     | INT                                     # IntExpr
     | FLOAT                                   # FloatExpr
     | ID                                      # IdExpr
     | '(' expr ')'                            # ParensExpr
     ;
 
-// --- REGLAS LÉXICAS (LEXER) ---
+
+
+// REGLAS LÉXICAS (LEXER)
+
 TRUE  : 'true' ;
 FALSE : 'false' ;
-
-STRING: '"' ~'"'* '"' ; // <-- NUEVO: Reconoce cualquier cosa entre comillas dobles
-
+STRING: '"' ~'"'* '"' ; // Reconoce cualquier cosa entre comillas dobles
 ID    : [a-zA-Z_][a-zA-Z0-9_]* ;
 FLOAT : [0-9]+ '.' [0-9]+ ;
 INT   : [0-9]+ ;
-
 WS      : [ \t\r\n]+ -> skip ;
 COMMENT : '//' ~[\r\n]* -> skip ;
