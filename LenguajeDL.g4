@@ -1,6 +1,18 @@
 grammar LenguajeDL;
 
-// REGLAS SINTÁCTICAS (PARSER)
+// REGLAS LÉXICAS
+
+TRUE  : 'true' ;
+FALSE : 'false' ;
+STRING: '"' ~'"'* '"' ; // Reconoce cualquier cosa entre comillas dobles
+ID    : [a-zA-Z_][a-zA-Z0-9_]* ;
+FLOAT : [0-9]+ '.' [0-9]+ ;
+INT   : [0-9]+ ;
+WS      : [ \t\r\n]+ -> skip ;
+COMMENT : '//' ~[\r\n]* -> skip ;
+
+
+// REGLAS SINTÁCTICAS
 program: statement+ EOF ;
 
 statement: assignment ';'             # assignStmt
@@ -27,13 +39,4 @@ expr: '-' expr                                # UnaryMinusExpr
 
 
 
-// REGLAS LÉXICAS (LEXER)
 
-TRUE  : 'true' ;
-FALSE : 'false' ;
-STRING: '"' ~'"'* '"' ; // Reconoce cualquier cosa entre comillas dobles
-ID    : [a-zA-Z_][a-zA-Z0-9_]* ;
-FLOAT : [0-9]+ '.' [0-9]+ ;
-INT   : [0-9]+ ;
-WS      : [ \t\r\n]+ -> skip ;
-COMMENT : '//' ~[\r\n]* -> skip ;

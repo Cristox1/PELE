@@ -63,10 +63,9 @@ class EvalVisitor(LenguajeDLVisitor):
     def visitBoolExpr(self, ctx: LenguajeDLParser.BoolExprContext):
         return ctx.getText() == 'true'
 
-    # --- NUEVO: Procesar Strings ---
     def visitStringExpr(self, ctx: LenguajeDLParser.StringExprContext):
         text = ctx.getText()
-        return text[1:-1] # Retorna el texto sin las comillas dobles de los extremos
+        return text[1:-1] 
 
     def visitIntExpr(self, ctx: LenguajeDLParser.IntExprContext):
         return int(ctx.getText())
