@@ -1,4 +1,4 @@
-# LenguajeDL - Proyecto de Lenguaje de Programacion
+# PELE - Proyecto de Lenguaje de Programacion
 
 Este repositorio contiene la primera fase del desarrollo de un lenguaje de programacion construido desde cero, diseñado con una orientacion futura hacia el Deep Learning. El proyecto utiliza ANTLR4 para la generacion del analizador lexico y sintactico, y Python como lenguaje anfitrion para la logica de evaluacion.
 
@@ -17,9 +17,9 @@ En esta primera entrega de avance, el lenguaje soporta las siguientes caracteris
 
 El proyecto se compone de tres archivos principales creados manualmente, mas los archivos subyacentes generados por la herramienta ANTLR4:
 
-*   `LenguajeDL.g4`: Archivo principal de gramatica. Define las reglas lexicas (tokens) y sintacticas (relaciones estructurales) de nuestro lenguaje.
-*   `demo_visitor.py`: Implementa el patron de diseño Visitor extendiendo las clases generadas por ANTLR. Contiene la logica en Python que le da significado y accion a las operaciones definidas en la gramatica (el "cerebro" del lenguaje).
-*   `main.py`: Archivo de entrada principal que inicializa el flujo de datos: pasa el codigo fuente al Lexer, luego al Parser, construye el arbol de sintaxis y finalmente lo recorre utilizando el Visitor.
+*   `PELE.g4`: Archivo principal de gramatica. Define las reglas lexicas (tokens) y sintacticas (relaciones estructurales) de nuestro lenguaje.
+*   `visitorPELE.py`: Implementa el patron de diseño Visitor extendiendo las clases generadas por ANTLR. Contiene la logica en Python que le da significado y accion a las operaciones definidas en la gramatica (el "cerebro" del lenguaje).
+*   `pele.py`: Archivo de entrada principal que inicializa el flujo de datos: pasa el codigo fuente al Lexer, luego al Parser, construye el arbol de sintaxis y finalmente lo recorre utilizando el Visitor.
 
 ## Requisitos Previos
 
@@ -52,46 +52,46 @@ A continuacion, se detallan los pasos para configurar el entorno de desarrollo e
 
 ## Compilacion y Ejecucion
 
-Cada vez que se realicen modificaciones estructurales en el archivo de gramatica (`LenguajeDL.g4`), es estrictamente necesario volver a generar los analizadores.
+Cada vez que se realicen modificaciones estructurales en el archivo de gramatica (`PELE.g4`), es estrictamente necesario volver a generar los analizadores.
 
 1.  **Generar el codigo de ANTLR:**
     Ejecuta el siguiente comando en la raiz del proyecto para que ANTLR genere los archivos de Python correspondientes.
     ```bash
-    antlr4 -Dlanguage=Python3 -visitor LenguajeDL.g4
+    antlr4 -Dlanguage=Python3 -visitor PELE.g4
     ```
 
 2.  **Ejecutar el programa de prueba:**
     Una vez generados los archivos, puedes ejecutar el interprete para evaluar el codigo fuente definido.
     ```bash
-    python main.py
+    python pele.py
     ```
 
-## Ejemplo de Codigo en LenguajeDL
+## Ejemplo de Codigo en PELE
 
-El archivo `main.py` procesa internamente un bloque de codigo escrito en LenguajeDL similar a este:
+El archivo `pele.py` procesa internamente un bloque de codigo escrito en PELE similar a este:
 
 ```text
-// Cadenas de texto
-saludo = "Hola, bienvenido a LenguajeDL";
-
-// Tipos de datos numericos y booleanos
-epocas = 100;
-learning_rate = 0.05;
-entrenamiento_activo = true;
-
-// Estructuras tipo Tensor (Arreglos)
-pesos = [0.1, -0.5, 0.8];
-
-// Operaciones aritmeticas extendidas
-calculo_potencia = 2 ** 3;
-calculo_modulo = 10 % 3;
-
-// Operadores relacionales
-es_mayor = epocas > 50;
-
-// Salida de datos en consola
-mostrar(saludo);
-mostrar(pesos);
-mostrar(calculo_potencia);
-mostrar(es_mayor);
+    // Pruebas de Strings
+    saludo = "Hola mundo con PELE";
+    
+    // Pruebas de Datos Basicos
+    entero = 100;
+    double = 0.05;
+    activo = true;
+    
+    // Pruebas de Arreglos
+    pesos = [0.1, -0.5, 0.8];
+    
+    // Pruebas Matematicas
+    potencia = 2 ** 3;
+    modulo = 10 % 3;
+    
+    // Mostrar Resultados
+    mostrar(saludo);
+    mostrar(entero);
+    mostrar(double);
+    mostrar(activo);
+    mostrar(pesos);
+    mostrar(potencia);
+    mostrar(modulo);
 ```

@@ -7,7 +7,7 @@ from visitorPELE import EvalVisitor
 def main():
     code = """
     // Pruebas de Strings
-    saludo = "Hola, bienvenido a PELE";
+    saludo = "Hola mundo con PELE";
     modelo = "Red Neuronal";
     
     // Pruebas de Datos Basicos
