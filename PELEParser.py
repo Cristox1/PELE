@@ -1,4 +1,4 @@
-# Generated from LenguajeDL.g4 by ANTLR 4.13.2
+# Generated from PELE.g4 by ANTLR 4.13.2
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -38,9 +38,9 @@ def serializedATN():
         0,74,7,1,0,0,0,75,73,1,0,0,0,6,11,27,42,57,71,73
     ]
 
-class LenguajeDLParser ( Parser ):
+class PELEParser ( Parser ):
 
-    grammarFileName = "LenguajeDL.g4"
+    grammarFileName = "PELE.g4"
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
@@ -115,17 +115,17 @@ class LenguajeDLParser ( Parser ):
             self.parser = parser
 
         def EOF(self):
-            return self.getToken(LenguajeDLParser.EOF, 0)
+            return self.getToken(PELEParser.EOF, 0)
 
         def statement(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(LenguajeDLParser.StatementContext)
+                return self.getTypedRuleContexts(PELEParser.StatementContext)
             else:
-                return self.getTypedRuleContext(LenguajeDLParser.StatementContext,i)
+                return self.getTypedRuleContext(PELEParser.StatementContext,i)
 
 
         def getRuleIndex(self):
-            return LenguajeDLParser.RULE_program
+            return PELEParser.RULE_program
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterProgram" ):
@@ -146,7 +146,7 @@ class LenguajeDLParser ( Parser ):
 
     def program(self):
 
-        localctx = LenguajeDLParser.ProgramContext(self, self._ctx, self.state)
+        localctx = PELEParser.ProgramContext(self, self._ctx, self.state)
         self.enterRule(localctx, 0, self.RULE_program)
         self._la = 0 # Token type
         try:
@@ -164,7 +164,7 @@ class LenguajeDLParser ( Parser ):
                     break
 
             self.state = 13
-            self.match(LenguajeDLParser.EOF)
+            self.match(PELEParser.EOF)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -183,7 +183,7 @@ class LenguajeDLParser ( Parser ):
 
 
         def getRuleIndex(self):
-            return LenguajeDLParser.RULE_statement
+            return PELEParser.RULE_statement
 
      
         def copyFrom(self, ctx:ParserRuleContext):
@@ -193,12 +193,12 @@ class LenguajeDLParser ( Parser ):
 
     class MostrarStmtContext(StatementContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LenguajeDLParser.StatementContext
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a PELEParser.StatementContext
             super().__init__(parser)
             self.copyFrom(ctx)
 
         def expr(self):
-            return self.getTypedRuleContext(LenguajeDLParser.ExprContext,0)
+            return self.getTypedRuleContext(PELEParser.ExprContext,0)
 
 
         def enterRule(self, listener:ParseTreeListener):
@@ -218,12 +218,12 @@ class LenguajeDLParser ( Parser ):
 
     class ExprStmtContext(StatementContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LenguajeDLParser.StatementContext
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a PELEParser.StatementContext
             super().__init__(parser)
             self.copyFrom(ctx)
 
         def expr(self):
-            return self.getTypedRuleContext(LenguajeDLParser.ExprContext,0)
+            return self.getTypedRuleContext(PELEParser.ExprContext,0)
 
 
         def enterRule(self, listener:ParseTreeListener):
@@ -243,12 +243,12 @@ class LenguajeDLParser ( Parser ):
 
     class AssignStmtContext(StatementContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LenguajeDLParser.StatementContext
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a PELEParser.StatementContext
             super().__init__(parser)
             self.copyFrom(ctx)
 
         def assignment(self):
-            return self.getTypedRuleContext(LenguajeDLParser.AssignmentContext,0)
+            return self.getTypedRuleContext(PELEParser.AssignmentContext,0)
 
 
         def enterRule(self, listener:ParseTreeListener):
@@ -269,43 +269,43 @@ class LenguajeDLParser ( Parser ):
 
     def statement(self):
 
-        localctx = LenguajeDLParser.StatementContext(self, self._ctx, self.state)
+        localctx = PELEParser.StatementContext(self, self._ctx, self.state)
         self.enterRule(localctx, 2, self.RULE_statement)
         try:
             self.state = 27
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,1,self._ctx)
             if la_ == 1:
-                localctx = LenguajeDLParser.AssignStmtContext(self, localctx)
+                localctx = PELEParser.AssignStmtContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
                 self.state = 15
                 self.assignment()
                 self.state = 16
-                self.match(LenguajeDLParser.T__0)
+                self.match(PELEParser.T__0)
                 pass
 
             elif la_ == 2:
-                localctx = LenguajeDLParser.ExprStmtContext(self, localctx)
+                localctx = PELEParser.ExprStmtContext(self, localctx)
                 self.enterOuterAlt(localctx, 2)
                 self.state = 18
                 self.expr(0)
                 self.state = 19
-                self.match(LenguajeDLParser.T__0)
+                self.match(PELEParser.T__0)
                 pass
 
             elif la_ == 3:
-                localctx = LenguajeDLParser.MostrarStmtContext(self, localctx)
+                localctx = PELEParser.MostrarStmtContext(self, localctx)
                 self.enterOuterAlt(localctx, 3)
                 self.state = 21
-                self.match(LenguajeDLParser.T__1)
+                self.match(PELEParser.T__1)
                 self.state = 22
-                self.match(LenguajeDLParser.T__2)
+                self.match(PELEParser.T__2)
                 self.state = 23
                 self.expr(0)
                 self.state = 24
-                self.match(LenguajeDLParser.T__3)
+                self.match(PELEParser.T__3)
                 self.state = 25
-                self.match(LenguajeDLParser.T__0)
+                self.match(PELEParser.T__0)
                 pass
 
 
@@ -326,14 +326,14 @@ class LenguajeDLParser ( Parser ):
             self.parser = parser
 
         def ID(self):
-            return self.getToken(LenguajeDLParser.ID, 0)
+            return self.getToken(PELEParser.ID, 0)
 
         def expr(self):
-            return self.getTypedRuleContext(LenguajeDLParser.ExprContext,0)
+            return self.getTypedRuleContext(PELEParser.ExprContext,0)
 
 
         def getRuleIndex(self):
-            return LenguajeDLParser.RULE_assignment
+            return PELEParser.RULE_assignment
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterAssignment" ):
@@ -354,14 +354,14 @@ class LenguajeDLParser ( Parser ):
 
     def assignment(self):
 
-        localctx = LenguajeDLParser.AssignmentContext(self, self._ctx, self.state)
+        localctx = PELEParser.AssignmentContext(self, self._ctx, self.state)
         self.enterRule(localctx, 4, self.RULE_assignment)
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 29
-            self.match(LenguajeDLParser.ID)
+            self.match(PELEParser.ID)
             self.state = 30
-            self.match(LenguajeDLParser.T__4)
+            self.match(PELEParser.T__4)
             self.state = 31
             self.expr(0)
         except RecognitionException as re:
@@ -382,7 +382,7 @@ class LenguajeDLParser ( Parser ):
 
 
         def getRuleIndex(self):
-            return LenguajeDLParser.RULE_expr
+            return PELEParser.RULE_expr
 
      
         def copyFrom(self, ctx:ParserRuleContext):
@@ -391,14 +391,14 @@ class LenguajeDLParser ( Parser ):
 
     class BoolExprContext(ExprContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LenguajeDLParser.ExprContext
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a PELEParser.ExprContext
             super().__init__(parser)
             self.copyFrom(ctx)
 
         def TRUE(self):
-            return self.getToken(LenguajeDLParser.TRUE, 0)
+            return self.getToken(PELEParser.TRUE, 0)
         def FALSE(self):
-            return self.getToken(LenguajeDLParser.FALSE, 0)
+            return self.getToken(PELEParser.FALSE, 0)
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterBoolExpr" ):
@@ -417,12 +417,12 @@ class LenguajeDLParser ( Parser ):
 
     class StringExprContext(ExprContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LenguajeDLParser.ExprContext
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a PELEParser.ExprContext
             super().__init__(parser)
             self.copyFrom(ctx)
 
         def STRING(self):
-            return self.getToken(LenguajeDLParser.STRING, 0)
+            return self.getToken(PELEParser.STRING, 0)
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterStringExpr" ):
@@ -441,16 +441,16 @@ class LenguajeDLParser ( Parser ):
 
     class PowerExprContext(ExprContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LenguajeDLParser.ExprContext
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a PELEParser.ExprContext
             super().__init__(parser)
             self.op = None # Token
             self.copyFrom(ctx)
 
         def expr(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(LenguajeDLParser.ExprContext)
+                return self.getTypedRuleContexts(PELEParser.ExprContext)
             else:
-                return self.getTypedRuleContext(LenguajeDLParser.ExprContext,i)
+                return self.getTypedRuleContext(PELEParser.ExprContext,i)
 
 
         def enterRule(self, listener:ParseTreeListener):
@@ -470,15 +470,15 @@ class LenguajeDLParser ( Parser ):
 
     class ArrayExprContext(ExprContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LenguajeDLParser.ExprContext
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a PELEParser.ExprContext
             super().__init__(parser)
             self.copyFrom(ctx)
 
         def expr(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(LenguajeDLParser.ExprContext)
+                return self.getTypedRuleContexts(PELEParser.ExprContext)
             else:
-                return self.getTypedRuleContext(LenguajeDLParser.ExprContext,i)
+                return self.getTypedRuleContext(PELEParser.ExprContext,i)
 
 
         def enterRule(self, listener:ParseTreeListener):
@@ -498,12 +498,12 @@ class LenguajeDLParser ( Parser ):
 
     class FloatExprContext(ExprContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LenguajeDLParser.ExprContext
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a PELEParser.ExprContext
             super().__init__(parser)
             self.copyFrom(ctx)
 
         def FLOAT(self):
-            return self.getToken(LenguajeDLParser.FLOAT, 0)
+            return self.getToken(PELEParser.FLOAT, 0)
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterFloatExpr" ):
@@ -522,12 +522,12 @@ class LenguajeDLParser ( Parser ):
 
     class IdExprContext(ExprContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LenguajeDLParser.ExprContext
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a PELEParser.ExprContext
             super().__init__(parser)
             self.copyFrom(ctx)
 
         def ID(self):
-            return self.getToken(LenguajeDLParser.ID, 0)
+            return self.getToken(PELEParser.ID, 0)
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterIdExpr" ):
@@ -546,16 +546,16 @@ class LenguajeDLParser ( Parser ):
 
     class MulDivModExprContext(ExprContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LenguajeDLParser.ExprContext
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a PELEParser.ExprContext
             super().__init__(parser)
             self.op = None # Token
             self.copyFrom(ctx)
 
         def expr(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(LenguajeDLParser.ExprContext)
+                return self.getTypedRuleContexts(PELEParser.ExprContext)
             else:
-                return self.getTypedRuleContext(LenguajeDLParser.ExprContext,i)
+                return self.getTypedRuleContext(PELEParser.ExprContext,i)
 
 
         def enterRule(self, listener:ParseTreeListener):
@@ -575,12 +575,12 @@ class LenguajeDLParser ( Parser ):
 
     class ParensExprContext(ExprContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LenguajeDLParser.ExprContext
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a PELEParser.ExprContext
             super().__init__(parser)
             self.copyFrom(ctx)
 
         def expr(self):
-            return self.getTypedRuleContext(LenguajeDLParser.ExprContext,0)
+            return self.getTypedRuleContext(PELEParser.ExprContext,0)
 
 
         def enterRule(self, listener:ParseTreeListener):
@@ -600,12 +600,12 @@ class LenguajeDLParser ( Parser ):
 
     class IntExprContext(ExprContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LenguajeDLParser.ExprContext
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a PELEParser.ExprContext
             super().__init__(parser)
             self.copyFrom(ctx)
 
         def INT(self):
-            return self.getToken(LenguajeDLParser.INT, 0)
+            return self.getToken(PELEParser.INT, 0)
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterIntExpr" ):
@@ -624,16 +624,16 @@ class LenguajeDLParser ( Parser ):
 
     class RelationalExprContext(ExprContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LenguajeDLParser.ExprContext
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a PELEParser.ExprContext
             super().__init__(parser)
             self.op = None # Token
             self.copyFrom(ctx)
 
         def expr(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(LenguajeDLParser.ExprContext)
+                return self.getTypedRuleContexts(PELEParser.ExprContext)
             else:
-                return self.getTypedRuleContext(LenguajeDLParser.ExprContext,i)
+                return self.getTypedRuleContext(PELEParser.ExprContext,i)
 
 
         def enterRule(self, listener:ParseTreeListener):
@@ -653,16 +653,16 @@ class LenguajeDLParser ( Parser ):
 
     class AddSubExprContext(ExprContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LenguajeDLParser.ExprContext
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a PELEParser.ExprContext
             super().__init__(parser)
             self.op = None # Token
             self.copyFrom(ctx)
 
         def expr(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(LenguajeDLParser.ExprContext)
+                return self.getTypedRuleContexts(PELEParser.ExprContext)
             else:
-                return self.getTypedRuleContext(LenguajeDLParser.ExprContext,i)
+                return self.getTypedRuleContext(PELEParser.ExprContext,i)
 
 
         def enterRule(self, listener:ParseTreeListener):
@@ -682,12 +682,12 @@ class LenguajeDLParser ( Parser ):
 
     class UnaryMinusExprContext(ExprContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LenguajeDLParser.ExprContext
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a PELEParser.ExprContext
             super().__init__(parser)
             self.copyFrom(ctx)
 
         def expr(self):
-            return self.getTypedRuleContext(LenguajeDLParser.ExprContext,0)
+            return self.getTypedRuleContext(PELEParser.ExprContext,0)
 
 
         def enterRule(self, listener:ParseTreeListener):
@@ -709,7 +709,7 @@ class LenguajeDLParser ( Parser ):
     def expr(self, _p:int=0):
         _parentctx = self._ctx
         _parentState = self.state
-        localctx = LenguajeDLParser.ExprContext(self, self._ctx, _parentState)
+        localctx = PELEParser.ExprContext(self, self._ctx, _parentState)
         _prevctx = localctx
         _startState = 6
         self.enterRecursionRule(localctx, 6, self.RULE_expr, _p)
@@ -720,21 +720,21 @@ class LenguajeDLParser ( Parser ):
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [6]:
-                localctx = LenguajeDLParser.UnaryMinusExprContext(self, localctx)
+                localctx = PELEParser.UnaryMinusExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
 
                 self.state = 34
-                self.match(LenguajeDLParser.T__5)
+                self.match(PELEParser.T__5)
                 self.state = 35
                 self.expr(13)
                 pass
             elif token in [18]:
-                localctx = LenguajeDLParser.ArrayExprContext(self, localctx)
+                localctx = PELEParser.ArrayExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
                 self.state = 36
-                self.match(LenguajeDLParser.T__17)
+                self.match(PELEParser.T__17)
                 self.state = 37
                 self.expr(0)
                 self.state = 42
@@ -742,7 +742,7 @@ class LenguajeDLParser ( Parser ):
                 _la = self._input.LA(1)
                 while _la==19:
                     self.state = 38
-                    self.match(LenguajeDLParser.T__18)
+                    self.match(PELEParser.T__18)
                     self.state = 39
                     self.expr(0)
                     self.state = 44
@@ -750,60 +750,60 @@ class LenguajeDLParser ( Parser ):
                     _la = self._input.LA(1)
 
                 self.state = 45
-                self.match(LenguajeDLParser.T__19)
+                self.match(PELEParser.T__19)
                 pass
             elif token in [21]:
-                localctx = LenguajeDLParser.BoolExprContext(self, localctx)
+                localctx = PELEParser.BoolExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
                 self.state = 47
-                self.match(LenguajeDLParser.TRUE)
+                self.match(PELEParser.TRUE)
                 pass
             elif token in [22]:
-                localctx = LenguajeDLParser.BoolExprContext(self, localctx)
+                localctx = PELEParser.BoolExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
                 self.state = 48
-                self.match(LenguajeDLParser.FALSE)
+                self.match(PELEParser.FALSE)
                 pass
             elif token in [23]:
-                localctx = LenguajeDLParser.StringExprContext(self, localctx)
+                localctx = PELEParser.StringExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
                 self.state = 49
-                self.match(LenguajeDLParser.STRING)
+                self.match(PELEParser.STRING)
                 pass
             elif token in [26]:
-                localctx = LenguajeDLParser.IntExprContext(self, localctx)
+                localctx = PELEParser.IntExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
                 self.state = 50
-                self.match(LenguajeDLParser.INT)
+                self.match(PELEParser.INT)
                 pass
             elif token in [25]:
-                localctx = LenguajeDLParser.FloatExprContext(self, localctx)
+                localctx = PELEParser.FloatExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
                 self.state = 51
-                self.match(LenguajeDLParser.FLOAT)
+                self.match(PELEParser.FLOAT)
                 pass
             elif token in [24]:
-                localctx = LenguajeDLParser.IdExprContext(self, localctx)
+                localctx = PELEParser.IdExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
                 self.state = 52
-                self.match(LenguajeDLParser.ID)
+                self.match(PELEParser.ID)
                 pass
             elif token in [3]:
-                localctx = LenguajeDLParser.ParensExprContext(self, localctx)
+                localctx = PELEParser.ParensExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
                 self.state = 53
-                self.match(LenguajeDLParser.T__2)
+                self.match(PELEParser.T__2)
                 self.state = 54
                 self.expr(0)
                 self.state = 55
-                self.match(LenguajeDLParser.T__3)
+                self.match(PELEParser.T__3)
                 pass
             else:
                 raise NoViableAltException(self)
@@ -821,20 +821,20 @@ class LenguajeDLParser ( Parser ):
                     self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,4,self._ctx)
                     if la_ == 1:
-                        localctx = LenguajeDLParser.PowerExprContext(self, LenguajeDLParser.ExprContext(self, _parentctx, _parentState))
+                        localctx = PELEParser.PowerExprContext(self, PELEParser.ExprContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
                         self.state = 59
                         if not self.precpred(self._ctx, 12):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 12)")
                         self.state = 60
-                        localctx.op = self.match(LenguajeDLParser.T__6)
+                        localctx.op = self.match(PELEParser.T__6)
                         self.state = 61
                         self.expr(13)
                         pass
 
                     elif la_ == 2:
-                        localctx = LenguajeDLParser.MulDivModExprContext(self, LenguajeDLParser.ExprContext(self, _parentctx, _parentState))
+                        localctx = PELEParser.MulDivModExprContext(self, PELEParser.ExprContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
                         self.state = 62
                         if not self.precpred(self._ctx, 11):
@@ -853,7 +853,7 @@ class LenguajeDLParser ( Parser ):
                         pass
 
                     elif la_ == 3:
-                        localctx = LenguajeDLParser.AddSubExprContext(self, LenguajeDLParser.ExprContext(self, _parentctx, _parentState))
+                        localctx = PELEParser.AddSubExprContext(self, PELEParser.ExprContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
                         self.state = 65
                         if not self.precpred(self._ctx, 10):
@@ -872,7 +872,7 @@ class LenguajeDLParser ( Parser ):
                         pass
 
                     elif la_ == 4:
-                        localctx = LenguajeDLParser.RelationalExprContext(self, LenguajeDLParser.ExprContext(self, _parentctx, _parentState))
+                        localctx = PELEParser.RelationalExprContext(self, PELEParser.ExprContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
                         self.state = 68
                         if not self.precpred(self._ctx, 9):

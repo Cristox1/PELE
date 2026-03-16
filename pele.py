@@ -1,13 +1,13 @@
 import sys
 from antlr4 import *
-from LenguajeDLLexer import LenguajeDLLexer
-from LenguajeDLParser import LenguajeDLParser
-from demo_visitor import EvalVisitor
+from PELELexer import PELELexer
+from PELEParser import PELEParser
+from visitorPELE import EvalVisitor
 
 def main():
     code = """
     // Pruebas de Strings
-    saludo = "Hola, bienvenido a LenguajeDL";
+    saludo = "Hola, bienvenido a PELE";
     modelo = "Red Neuronal";
     
     // Pruebas de Datos Basicos
@@ -34,9 +34,9 @@ def main():
     """
 
     input_stream = InputStream(code)
-    lexer = LenguajeDLLexer(input_stream)
+    lexer = PELELexer(input_stream)
     stream = CommonTokenStream(lexer)
-    parser = LenguajeDLParser(stream)
+    parser = PELEParser(stream)
     tree = parser.program()
     
     visitor = EvalVisitor()

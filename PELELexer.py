@@ -1,4 +1,4 @@
-# Generated from LenguajeDL.g4 by ANTLR 4.13.2
+# Generated from PELE.g4 by ANTLR 4.13.2
 from antlr4 import *
 from io import StringIO
 import sys
@@ -72,7 +72,7 @@ def serializedATN():
         0,0
     ]
 
-class LenguajeDLLexer(Lexer):
+class PELELexer(Lexer):
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
@@ -125,7 +125,7 @@ class LenguajeDLLexer(Lexer):
                   "TRUE", "FALSE", "STRING", "ID", "FLOAT", "INT", "WS", 
                   "COMMENT" ]
 
-    grammarFileName = "LenguajeDL.g4"
+    grammarFileName = "PELE.g4"
 
     def __init__(self, input=None, output:TextIO = sys.stdout):
         super().__init__(input, output)

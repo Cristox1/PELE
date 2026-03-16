@@ -1,4 +1,4 @@
-grammar LenguajeDL;
+grammar PELE;
 
 // REGLAS LÉXICAS
 
