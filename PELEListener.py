@@ -17,6 +17,15 @@ class PELEListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by PELEParser#block.
+    def enterBlock(self, ctx:PELEParser.BlockContext):
+        pass
+
+    # Exit a parse tree produced by PELEParser#block.
+    def exitBlock(self, ctx:PELEParser.BlockContext):
+        pass
+
+
     # Enter a parse tree produced by PELEParser#assignStmt.
     def enterAssignStmt(self, ctx:PELEParser.AssignStmtContext):
         pass
@@ -41,6 +50,24 @@ class PELEListener(ParseTreeListener):
 
     # Exit a parse tree produced by PELEParser#mostrarStmt.
     def exitMostrarStmt(self, ctx:PELEParser.MostrarStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by PELEParser#ifStmt.
+    def enterIfStmt(self, ctx:PELEParser.IfStmtContext):
+        pass
+
+    # Exit a parse tree produced by PELEParser#ifStmt.
+    def exitIfStmt(self, ctx:PELEParser.IfStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by PELEParser#ifStatement.
+    def enterIfStatement(self, ctx:PELEParser.IfStatementContext):
+        pass
+
+    # Exit a parse tree produced by PELEParser#ifStatement.
+    def exitIfStatement(self, ctx:PELEParser.IfStatementContext):
         pass
 
 
@@ -71,24 +98,6 @@ class PELEListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by PELEParser#PowerExpr.
-    def enterPowerExpr(self, ctx:PELEParser.PowerExprContext):
-        pass
-
-    # Exit a parse tree produced by PELEParser#PowerExpr.
-    def exitPowerExpr(self, ctx:PELEParser.PowerExprContext):
-        pass
-
-
-    # Enter a parse tree produced by PELEParser#ArrayExpr.
-    def enterArrayExpr(self, ctx:PELEParser.ArrayExprContext):
-        pass
-
-    # Exit a parse tree produced by PELEParser#ArrayExpr.
-    def exitArrayExpr(self, ctx:PELEParser.ArrayExprContext):
-        pass
-
-
     # Enter a parse tree produced by PELEParser#FloatExpr.
     def enterFloatExpr(self, ctx:PELEParser.FloatExprContext):
         pass
@@ -104,6 +113,33 @@ class PELEListener(ParseTreeListener):
 
     # Exit a parse tree produced by PELEParser#IdExpr.
     def exitIdExpr(self, ctx:PELEParser.IdExprContext):
+        pass
+
+
+    # Enter a parse tree produced by PELEParser#RelationalExpr.
+    def enterRelationalExpr(self, ctx:PELEParser.RelationalExprContext):
+        pass
+
+    # Exit a parse tree produced by PELEParser#RelationalExpr.
+    def exitRelationalExpr(self, ctx:PELEParser.RelationalExprContext):
+        pass
+
+
+    # Enter a parse tree produced by PELEParser#PowerExpr.
+    def enterPowerExpr(self, ctx:PELEParser.PowerExprContext):
+        pass
+
+    # Exit a parse tree produced by PELEParser#PowerExpr.
+    def exitPowerExpr(self, ctx:PELEParser.PowerExprContext):
+        pass
+
+
+    # Enter a parse tree produced by PELEParser#ArrayExpr.
+    def enterArrayExpr(self, ctx:PELEParser.ArrayExprContext):
+        pass
+
+    # Exit a parse tree produced by PELEParser#ArrayExpr.
+    def exitArrayExpr(self, ctx:PELEParser.ArrayExprContext):
         pass
 
 
@@ -134,15 +170,6 @@ class PELEListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by PELEParser#RelationalExpr.
-    def enterRelationalExpr(self, ctx:PELEParser.RelationalExprContext):
-        pass
-
-    # Exit a parse tree produced by PELEParser#RelationalExpr.
-    def exitRelationalExpr(self, ctx:PELEParser.RelationalExprContext):
-        pass
-
-
     # Enter a parse tree produced by PELEParser#AddSubExpr.
     def enterAddSubExpr(self, ctx:PELEParser.AddSubExprContext):
         pass
@@ -158,6 +185,15 @@ class PELEListener(ParseTreeListener):
 
     # Exit a parse tree produced by PELEParser#UnaryMinusExpr.
     def exitUnaryMinusExpr(self, ctx:PELEParser.UnaryMinusExprContext):
+        pass
+
+
+    # Enter a parse tree produced by PELEParser#FuncCallExpr.
+    def enterFuncCallExpr(self, ctx:PELEParser.FuncCallExprContext):
+        pass
+
+    # Exit a parse tree produced by PELEParser#FuncCallExpr.
+    def exitFuncCallExpr(self, ctx:PELEParser.FuncCallExprContext):
         pass
 
 

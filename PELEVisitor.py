@@ -14,6 +14,11 @@ class PELEVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by PELEParser#block.
+    def visitBlock(self, ctx:PELEParser.BlockContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by PELEParser#assignStmt.
     def visitAssignStmt(self, ctx:PELEParser.AssignStmtContext):
         return self.visitChildren(ctx)
@@ -26,6 +31,16 @@ class PELEVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by PELEParser#mostrarStmt.
     def visitMostrarStmt(self, ctx:PELEParser.MostrarStmtContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PELEParser#ifStmt.
+    def visitIfStmt(self, ctx:PELEParser.IfStmtContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PELEParser#ifStatement.
+    def visitIfStatement(self, ctx:PELEParser.IfStatementContext):
         return self.visitChildren(ctx)
 
 
@@ -44,16 +59,6 @@ class PELEVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PELEParser#PowerExpr.
-    def visitPowerExpr(self, ctx:PELEParser.PowerExprContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by PELEParser#ArrayExpr.
-    def visitArrayExpr(self, ctx:PELEParser.ArrayExprContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by PELEParser#FloatExpr.
     def visitFloatExpr(self, ctx:PELEParser.FloatExprContext):
         return self.visitChildren(ctx)
@@ -61,6 +66,21 @@ class PELEVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by PELEParser#IdExpr.
     def visitIdExpr(self, ctx:PELEParser.IdExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PELEParser#RelationalExpr.
+    def visitRelationalExpr(self, ctx:PELEParser.RelationalExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PELEParser#PowerExpr.
+    def visitPowerExpr(self, ctx:PELEParser.PowerExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PELEParser#ArrayExpr.
+    def visitArrayExpr(self, ctx:PELEParser.ArrayExprContext):
         return self.visitChildren(ctx)
 
 
@@ -79,11 +99,6 @@ class PELEVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PELEParser#RelationalExpr.
-    def visitRelationalExpr(self, ctx:PELEParser.RelationalExprContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by PELEParser#AddSubExpr.
     def visitAddSubExpr(self, ctx:PELEParser.AddSubExprContext):
         return self.visitChildren(ctx)
@@ -91,6 +106,11 @@ class PELEVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by PELEParser#UnaryMinusExpr.
     def visitUnaryMinusExpr(self, ctx:PELEParser.UnaryMinusExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PELEParser#FuncCallExpr.
+    def visitFuncCallExpr(self, ctx:PELEParser.FuncCallExprContext):
         return self.visitChildren(ctx)
 
 

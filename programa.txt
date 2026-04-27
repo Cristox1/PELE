@@ -1,0 +1,78 @@
+// --- LISTAS / ARRAYS ---
+mostrar("## LISTAS");
+lista1 = [1, 2, 3];
+mostrar(lista1);
+lista1_2 = [ "a", "b", "c" ];
+mostrar(lista1_2);
+mostrar("----");
+
+// --- MAPAS / DICCIONARIOS ---
+mostrar("## MAPAS");
+pares = [[ "a", 1 ], [ "b", 2 ]];
+m1 = crear_mapa(pares);          // debe retornar {'a':1, 'b':2}
+mostrar(m1);
+mostrar(mapa_get(m1, "a"));
+mapa_put(m1, "c", 3);
+mostrar(mapa_keys(m1));
+mostrar("----");
+
+// --- PILAS ---
+mostrar("## PILAS");
+p1 = crear_pila();
+pila_push(p1, 10);
+pila_push(p1, 20);
+mostrar(p1);
+mostrar(pila_pop(p1));  // 20
+mostrar(pila_pop(p1));  // 10
+mostrar("----");
+
+// --- COLAS ---
+mostrar("## COLAS");
+q1 = crear_cola();
+cola_enqueue(q1, "x");
+cola_enqueue(q1, "y");
+mostrar(q1);
+mostrar(cola_dequeue(q1)); // "x"
+mostrar(cola_dequeue(q1)); // "y"
+mostrar("----");
+
+// --- CONJUNTOS ---
+mostrar("## CONJUNTOS");
+s1 = crear_conjunto([1,2,2,3]);
+mostrar(s1);
+conjunto_add(s1, 4);
+mostrar(conjunto_contains(s1, 2)); // true
+mostrar("----");
+
+// --- MATRICES ---
+mostrar("## MATRICES");
+mat = crear_matriz(2, 3, 0);
+mostrar(mat);
+mat_set(mat, 0, 1, 5);
+mostrar(mat_get(mat, 0, 1)); // 5
+mostrar("----");
+
+// --- ARBOLES ---
+mostrar("## ARBOLES");
+root = crear_arbol("raiz");
+h1 = crear_arbol("h1");
+h2 = crear_arbol("h2");
+arbol_add_child(root, h1);
+arbol_add_child(root, h2);
+mostrar(arbol_preorder(root)); // lista con "raiz","h1","h2"
+mostrar("----");
+
+// --- GRAFOS ---
+mostrar("## GRAFOS");
+g = crear_grafo();
+grafo_add_node(g, "A");
+grafo_add_node(g, "B");
+grafo_add_node(g, "C");
+grafo_add_edge(g, "A", "B");
+grafo_add_edge(g, "A", "C");
+mostrar(g);
+mostrar(grafo_bfs(g, "A")); // recorrido BFS
+mostrar("----");
+
+// --- FIN: recopilación (opcional) ---
+mostrar("## FIN DE PRUEBAS");
