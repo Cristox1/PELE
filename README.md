@@ -1,25 +1,28 @@
 # PELE - Proyecto de Lenguaje de Programacion
 
-Este repositorio contiene la primera fase del desarrollo de un lenguaje de programacion construido desde cero, diseñado con una orientacion futura hacia el Deep Learning. El proyecto utiliza ANTLR4 para la generacion del analizador lexico y sintactico, y Python como lenguaje anfitrion para la logica de evaluacion.
+Este repositorio contiene el desarrollo de un lenguaje de programacion interpretado y construido desde cero, disenado con una orientacion futura hacia el Deep Learning. El proyecto utiliza ANTLR4 para la generacion del analizador lexico y sintactico (Parser/Lexer), y Python como lenguaje anfitrion para la logica de evaluacion y el arbol de sintaxis abstracta (AST).
 
-## Caracteristicas Actuales (Fase 1)
+## Caracteristicas Actuales
 
-En esta primera entrega de avance, el lenguaje soporta las siguientes caracteristicas fundamentales:
+El lenguaje PELE ha evolucionado significativamente, logrando la completitud de Turing al soportar las siguientes caracteristicas:
 
 *   **Tipos de datos:** Soporte nativo para numeros enteros (INT), de punto flotante (FLOAT), valores booleanos (true, false) y cadenas de texto (Strings).
-*   **Estructuras de datos basicas:** Soporte para arreglos (listas) de una dimension, sentando las bases para futuros tensores o matrices.
-*   **Asignacion de variables:** Capacidad de almacenar y recuperar valores en memoria durante la ejecucion del programa.
-*   **Operaciones aritmeticas extendidas:** Suma (+), resta (-), multiplicacion (*), division (/), modulo (%) y potencia (**). Incluye soporte para numeros negativos (menos unario) respetando estrictamente la precedencia de operadores.
-*   **Operadores relacionales:** Capacidad de comparar expresiones y variables utilizando los operadores <, <=, >, >=, == y !=.
-*   **Control de flujo basico:** Sentencias delimitadas por punto y coma (;) y funcion nativa de impresion en consola mediante la instruccion `mostrar()`.
+*   **Estructuras de datos avanzadas:** Soporte nativo y funciones integradas para Arreglos (listas 1D), Mapas (diccionarios), Pilas, Colas, Conjuntos, Matrices, Arboles y Grafos.
+*   **Manejo de Memoria y Ambitos (Scopes):** Sistema de asignacion de variables con soporte para una Pila de Llamadas (Call Stack), lo que permite separar la memoria global de las memorias locales de ejecucion.
+*   **Operaciones aritmeticas:** Suma (+), resta (-), multiplicacion (*), division (/), modulo (%) y potencia (**). Incluye soporte para numeros negativos respetando la precedencia de operadores.
+*   **Operadores relacionales:** Comparacion logica mediante <, <=, >, >=, == y !=.
+*   **Control de flujo condicional:** Ramificacion de codigo utilizando las palabras clave nativas `si` (if), `sino` (elif) y `entonces` (else).
+*   **Control de flujo iterativo:** Soporte para bucles a traves de las instrucciones `mientras` (while) y `por` (for).
+*   **Funciones y Recursividad:** Declaracion de subrutinas definidas por el usuario con la palabra clave `funcion`, paso de parametros, y devolucion de resultados mediante `retornar`. Soporte absoluto para recursividad pura.
 
 ## Estructura del Proyecto
 
-El proyecto se compone de tres archivos principales creados manualmente, mas los archivos subyacentes generados por la herramienta ANTLR4:
+El proyecto se compone de archivos principales creados manualmente, mas los archivos subyacentes generados por la herramienta ANTLR4:
 
-*   `PELE.g4`: Archivo principal de gramatica. Define las reglas lexicas (tokens) y sintacticas (relaciones estructurales) de nuestro lenguaje.
-*   `visitorPELE.py`: Implementa el patron de diseño Visitor extendiendo las clases generadas por ANTLR. Contiene la logica en Python que le da significado y accion a las operaciones definidas en la gramatica (el "cerebro" del lenguaje).
-*   `pele.py`: Archivo de entrada principal que inicializa el flujo de datos: pasa el codigo fuente al Lexer, luego al Parser, construye el arbol de sintaxis y finalmente lo recorre utilizando el Visitor.
+*   `PELE.g4`: Archivo principal de gramatica. Define las reglas lexicas (tokens) y sintacticas del lenguaje.
+*   `visitorPELE.py`: Implementa el patron de diseno Visitor extendiendo las clases generadas por ANTLR. Es el "motor semantico" que ejecuta el codigo.
+*   `pele.py`: Archivo de entrada principal que lee el archivo fuente, inicializa el pipeline de datos (Lexer -> Parser -> AST) y llama al Visitor.
+*   `programa.txt`: Archivo de texto plano donde se escribe el codigo fuente de PELE a ser ejecutado.
 
 ## Requisitos Previos
 
@@ -31,10 +34,9 @@ Para compilar y ejecutar este proyecto, el entorno debe contar con:
 
 ## Instalacion y Configuracion
 
-A continuacion, se detallan los pasos para configurar el entorno de desarrollo en sistemas basados en Unix (Linux/macOS):
+Pasos para configurar el entorno de desarrollo en sistemas basados en Unix (Linux/macOS):
 
 1.  **Crear un entorno virtual:**
-    Se recomienda usar un entorno virtual para aislar las dependencias del proyecto del resto del sistema operativo.
     ```bash
     python3 -m venv env
     ```
@@ -45,171 +47,65 @@ A continuacion, se detallan los pasos para configurar el entorno de desarrollo e
     ```
 
 3.  **Instalar las dependencias de Python:**
-    Se requiere instalar el runtime de ANTLR4 especifico para Python 3.
     ```bash
     pip install antlr4-python3-runtime
     ```
 
 ## Compilacion y Ejecucion
 
-Cada vez que se realicen modificaciones estructurales en el archivo de gramatica (`PELE.g4`), es estrictamente necesario volver a generar los analizadores.
+Cada vez que se realicen modificaciones estructurales en la gramatica (`PELE.g4`), es necesario volver a generar los analizadores:
 
 1.  **Generar el codigo de ANTLR:**
-    Ejecuta el siguiente comando en la raiz del proyecto para que ANTLR genere los archivos de Python correspondientes.
     ```bash
     antlr4 -Dlanguage=Python3 -visitor PELE.g4
     ```
 
-2.  **Ejecutar el programa de prueba:**
-    Una vez generados los archivos, puedes ejecutar el interprete para evaluar el codigo fuente definido.
+2.  **Ejecutar el programa:**
+    Asegurate de escribir tu codigo en el archivo `programa.txt` y luego ejecuta el interprete:
     ```bash
-    python pele.py
+    python3 pele.py
     ```
 
 ## Ejemplo de Codigo en PELE
 
-El archivo `pele.py` procesa internamente un bloque de codigo escrito en PELE similar a este:
+El lenguaje ahora es capaz de ejecutar algoritmos complejos como la recursividad. Un ejemplo del codigo que puedes escribir en `programa.txt` es:
 
 ```text
-    // Pruebas de Strings
-    saludo = "Hola mundo con PELE";
-    
-    // Pruebas de Datos Basicos
-    entero = 100;
-    double = 0.05;
-    activo = true;
-    
-    // Pruebas de Arreglos
-    pesos = [0.1, -0.5, 0.8];
-    
-    // Pruebas Matematicas
-    potencia = 2 ** 3;
-    modulo = 10 % 3;
-    
-    // Mostrar Resultados
-    mostrar(saludo);
-    mostrar(entero);
-    mostrar(double);
-    mostrar(activo);
-    mostrar(pesos);
-    mostrar(potencia);
-    mostrar(modulo);
+    // 1. Condicionales y Ciclos
+    por (i = 0; i < 5; i = i + 1) {
+        si (i % 2 == 0) {
+            mostrar("Es par:");
+        } sino (i == 3) {
+            mostrar("Es el numero tres");
+        } entonces {
+            mostrar("Es otro impar");
+        }
+        mostrar(i);
+    }
+
+    // 2. Funciones de usuario y Recursividad
+    funcion factorial(n) {
+        si (n <= 1) {
+            retornar 1;
+        }
+        retornar n * factorial(n - 1);
+    }
+
+    resultado = factorial(5);
+    mostrar("El factorial de 5 es:");
+    mostrar(resultado);
 ```
-# PELE - Avance de implementación
-
-## ¿Qué hice en el proyecto?
-
-En este avance realicé una modificación importante en el intérprete del lenguaje **PELE** para que ya no dependa de código escrito directamente dentro de `pele.py`, sino que pueda leer el programa desde un archivo externo `.txt`.
-
-### Cambios principales realizados
-
-1. **Lectura de código desde archivo**
-   - Modifiqué `pele.py` para que lea el contenido de `programa.txt`.
-   - Esto permite escribir el código PELE en un archivo de texto separado y luego ejecutarlo desde el intérprete.
-
-2. **Ejecución del programa desde consola**
-   - El intérprete toma el archivo `.txt`, lo procesa con ANTLR4 y luego ejecuta las instrucciones.
-   - El resultado se muestra directamente por consola usando la función nativa `mostrar()`.
-
-3. **Actualización de la gramática**
-   - Se realizaron cambios en `PELE.g4` para preparar el lenguaje para nuevas estructuras.
-   - Se reorganizó la gramática para trabajar con bloques y permitir una evolución futura del lenguaje.
-
-4. **Primeras pruebas de estructuras**
-   - Se hicieron pruebas con expresiones, variables, arreglos y operaciones básicas.
-   - También se preparó el terreno para agregar estructuras más avanzadas del lenguaje.
-
-5. **Mejoras en el intérprete**
-   - Se ajustó `visitorPELE.py` para que evalúe correctamente las expresiones del lenguaje.
-   - Se trabajó en la lógica de recorrido del árbol sintáctico para que el lenguaje funcione de manera interpretada.
-
-> En este punto, el proyecto ya tiene una base funcional para ejecutar código PELE desde un archivo `.txt`.
 
 ---
 
-## ¿Qué dice el README del repositorio actualmente?
+# Historial de Avances
 
-Según el README del repositorio [Cristox1/PELE](https://github.com/Cristox1/PELE), este proyecto es la primera fase de un lenguaje de programación construido desde cero, con orientación futura hacia **Deep Learning**.
+## Avances Recientes:
 
-### Características que el README indica que ya existen
+En las ultimas iteraciones, el lenguaje PELE sufrio una transformacion arquitectonica profunda para pasar de ser una calculadora secuencial a un lenguaje de programacion completo:
 
-El lenguaje PELE actualmente soporta:
-
-- **Tipos de datos básicos**
-  - `INT`
-  - `FLOAT`
-  - `true` / `false`
-  - `Strings`
-
-- **Estructuras de datos básicas**
-  - arreglos de una dimensión
-
-- **Asignación de variables**
-  - guardar y recuperar valores en memoria durante la ejecución
-
-- **Operaciones aritméticas**
-  - suma `+`
-  - resta `-`
-  - multiplicación `*`
-  - división `/`
-  - módulo `%`
-  - potencia `**`
-  - soporte para números negativos
-
-- **Operadores relacionales**
-  - `<`
-  - `<=`
-  - `>`
-  - `>=`
-  - `==`
-  - `!=`
-
-- **Control de flujo básico**
-  - sentencias terminadas con `;`
-  - función nativa `mostrar()`
-
----
-
-## Estructura actual del proyecto
-
-El README también explica que el proyecto se compone de tres archivos principales hechos manualmente, más los generados por ANTLR4:
-
-- `PELE.g4`
-  - contiene la gramática del lenguaje
-
-- `visitorPELE.py`
-  - implementa la lógica de evaluación del lenguaje
-
-- `pele.py`
-  - es el archivo de entrada principal que carga y ejecuta el programa
-
-Y además existen varios archivos generados por ANTLR como:
-
-- `PELELexer.py`
-- `PELEParser.py`
-- `PELEVisitor.py`
-- `PELEListener.py`
-- archivos `.tokens`
-- archivos `.interp`
-
----
-
-## Relación entre lo que hice y el README
-
-Lo que hice va totalmente alineado con la idea del proyecto, porque el README dice que PELE es un lenguaje en desarrollo, construido desde cero, y que usa ANTLR4 + Python para interpretar el código.
-
-Mi avance encaja como una mejora de la **fase inicial** del lenguaje, ya que:
-
-- permite ejecutar código desde un archivo externo
-- hace que el intérprete sea más práctico
-- mantiene la base para seguir agregando estructuras del lenguaje
-- prepara el proyecto para crecer hacia funcionalidades más complejas en el futuro
-
----
-
-## Conclusión
-
-En resumen, lo que hice fue convertir el intérprete de PELE en una versión más práctica y funcional, permitiendo que lea y ejecute un programa desde `programa.txt`, en lugar de tener el código incrustado dentro del archivo principal.
-
-Además, el proyecto sigue la línea descrita en su README:  
-un lenguaje propio, interpretado con ANTLR4 y Python, con soporte actual para tipos básicos, operaciones, variables, arreglos y salida por consola, y con visión futura hacia estructuras más complejas y aplicaciones relacionadas con Deep Learning.
+1. **Lectura de codigo desde archivo:** Se abstrajo la ejecucion hacia `programa.txt` para separar el interprete del codigo fuente.
+2. **Control de Flujo:** Se anadieron reglas sintacticas y semanticas para soportar decisiones logicas (`si`, `sino`, `entonces`) y bucles (`por`, `mientras`).
+3. **Pila de Llamadas (Call Stack):** Se reemplazo la memoria global estatica por un sistema de contextos dinamicos (Scopes) basados en diccionarios apilados, vital para aislar variables locales.
+4. **Funciones Personalizadas:** Se integro el soporte para que el usuario defina bloques de codigo reusables y pueda utilizar la palabra clave `retornar` (implementada mediante interrupciones de excepcion en el arbol AST).
+5. **Pruebas Exhaustivas:** Se construyo un script de pruebas robusto que valida todos los tipos de datos, operaciones matematicas, y todas las estructuras de datos complejas (desde arreglos hasta grafos).
