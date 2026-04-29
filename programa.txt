@@ -2,7 +2,7 @@
 // SCRIPT DE PRUEBAS DEL LENGUAJE PELE
 // ==========================================
 
-mostrar("=== 1. TIPOS DE DATOS Y VARIABLES ===");
+mostrar("===> 1. Ttipos de datos");
 texto = "Bienvenido a PELE";
 entero = 42;
 flotante = 3.1416;
@@ -18,7 +18,7 @@ mostrar("Variable booleana:");
 mostrar(activo);
 mostrar(" ");
 
-mostrar("=== 2. OPERACIONES MATEMATICAS ===");
+mostrar("===> 2. Operaciones matematicas");
 suma = 10 + 5;
 resta = 20 - 8;
 multiplicacion = 4 * 5;
@@ -27,13 +27,17 @@ modulo = 10 % 3;
 potencia = 2 ** 3;
 negativo = -15;
 
-mostrar("Suma (10 + 5):"); mostrar(suma);
-mostrar("Potencia (2 ** 3):"); mostrar(potencia);
-mostrar("Modulo (10 % 3):"); mostrar(modulo);
-mostrar("Numero negativo unario:"); mostrar(negativo);
+mostrar("Suma (10 + 5):"); 
+mostrar(suma);
+mostrar("Potencia (2 ** 3):"); 
+mostrar(potencia);
+mostrar("Modulo (10 % 3):"); 
+mostrar(modulo);
+mostrar("Numero negativo unario:"); 
+mostrar(negativo);
 mostrar(" ");
 
-mostrar("=== 3. OPERADORES RELACIONALES ===");
+mostrar("===> 3. Operadores relacionales");
 mostrar("¿Es 10 mayor que 5?");
 mostrar(10 > 5);
 mostrar("¿Es 10 igual a 10?");
@@ -42,95 +46,101 @@ mostrar("¿Es 5 diferente de 5?");
 mostrar(5 != 5);
 mostrar(" ");
 
-mostrar("=== 4. CONDICIONALES (SI, SINO, ENTONCES) ===");
+mostrar("===> 4. Condicionales: Si, Sino, Entonces ");
 valor = 50;
-mostrar("Evaluando la variable 'valor' (es 50):");
+mostrar("Evaluando la variable valor: 50");
 
-si (valor > 100) {
-    mostrar("El valor es mayor que 100");
+si (valor > 50) {
+    mostrar("El valor es mayor que 50");
 } sino (valor == 50) {
-    mostrar("Correcto: El valor es exactamente 50");
+    mostrar("El valor es exactamente 50");
 } entonces {
-    mostrar("El valor es otra cosa");
+    mostrar("El valor es menor a 50 ");
 }
 mostrar(" ");
 
-mostrar("=== 5. CICLO MIENTRAS (WHILE) ===");
+mostrar("===> 5. Ciclo while, contador de 0 mientras que sea menor a 5");
 contador = 0;
-mientras (contador < 3) {
+mientras (contador < 5) {
     mostrar("Iteracion mientras:");
     mostrar(contador);
     contador = contador + 1;
 }
 mostrar(" ");
 
-mostrar("=== 6. CICLO POR (FOR) ===");
-por (i = 0; i < 3; i = i + 1) {
+mostrar("===> 6. Ciclo for, contador +1 mientras que sea menor a 5");
+por (i = 0; i < 5; i = i + 1) {
     mostrar("Iteracion por:");
     mostrar(i);
 }
 mostrar(" ");
 
-mostrar("=== 7. ESTRUCTURAS DE DATOS AVANZADAS ===");
+mostrar("===> 7. Estructuras de datos");
 
-mostrar("--- Arreglos ---");
+mostrar("-> Arreglos");
 mi_arreglo = [10, 20, 30];
-mostrar("Arreglo creado:");
 mostrar(mi_arreglo);
+mostrar(" ");
 
-mostrar("--- Mapas ---");
+mostrar("-> Mapas");
 pares = [["clave1", 100], ["clave2", 200]];
 mapa = crear_mapa(pares);
-mostrar("Mapa creado:");
 mostrar(mapa);
 mostrar("Obtener 'clave1':");
 mostrar(mapa_get(mapa, "clave1"));
+mostrar(" ");
 
-mostrar("--- Pilas ---");
+mostrar("-> Pilas");
 pila = crear_pila();
 pila_push(pila, "primero");
+mostrar(pila);
 pila_push(pila, "segundo");
+mostrar(pila);
 mostrar("Sacando el ultimo elemento de la pila:");
 mostrar(pila_pop(pila));
+mostrar(" ");
 
-mostrar("--- Colas ---");
+mostrar("-> Colas");
 cola = crear_cola();
 cola_enqueue(cola, "primero");
+mostrar(cola);
 cola_enqueue(cola, "segundo");
+mostrar(cola);
 mostrar("Sacando el primer elemento de la cola:");
 mostrar(cola_dequeue(cola));
+mostrar(" ");
 
-mostrar("--- Conjuntos ---");
+mostrar("-> Conjuntos ");
 conj = crear_conjunto([1, 1, 2, 3]);
-mostrar("Conjunto sin duplicados:");
 mostrar(conj);
+mostrar(" ");
 
-mostrar("--- Matrices ---");
+mostrar("-> Matrices ");
 matriz = crear_matriz(2, 2, 9);
 mostrar("Matriz 2x2 inicializada con 9:");
 mostrar(matriz);
+mostrar(" ");
 
-mostrar("--- Arboles ---");
+mostrar("-> Arboles");
 raiz = crear_arbol("Raiz");
 hijo = crear_arbol("Hijo 1");
 arbol_add_child(raiz, hijo);
 mostrar("Recorrido preorder del arbol:");
 mostrar(arbol_preorder(raiz));
+mostrar(" ");
 
-mostrar("--- Grafos ---");
+mostrar("-> Grafos ");
 grafo = crear_grafo();
 grafo_add_node(grafo, "NodoA");
 grafo_add_node(grafo, "NodoB");
 grafo_add_edge(grafo, "NodoA", "NodoB");
 mostrar("Vecinos del NodoA:");
 mostrar(grafo_neighbors(grafo, "NodoA"));
+mostrar(" ");
 
-mostrar("==========================================");
-mostrar("   PRUEBAS COMPLETADAS EXITOSAMENTE       ");
-mostrar("==========================================");
+mostrar("===> 8. Funciones con recursividad");
 
-
-mostrar("=== 8. FUNCIONES DE USUARIO Y RECURSIVIDAD ===");
+mostrar("Factorial de 5:");
 
 funcion factorial(n) {
     si (n <= 1) {
@@ -140,5 +150,5 @@ funcion factorial(n) {
 }
 
 resultado_fac = factorial(5);
-mostrar("El factorial de 5 es:");
+
 mostrar(resultado_fac);

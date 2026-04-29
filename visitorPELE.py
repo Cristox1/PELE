@@ -22,11 +22,6 @@ class EvalVisitor(PELEVisitor):
 
     def visitProgram(self, ctx: PELEParser.ProgramContext):
         return self.visit(ctx.block()) 
-    
-    def visitBlock(self, ctx: PELEParser.BlockContext):
-        for stmt in ctx.statement():
-            self.visit(stmt)
-        return None
 
     def visitAssignStmt(self, ctx: PELEParser.AssignStmtContext):
         # Este maneja: a = 5;
@@ -106,51 +101,43 @@ class EvalVisitor(PELEVisitor):
     def visitParensExpr(self, ctx: PELEParser.ParensExprContext):
         return self.visit(ctx.expr())
     
-    # Reemplaza tu visitIfStmt anterior con este:
+    def visitBlock(self, ctx: PELEParser.BlockContext):
+        for stmt in ctx.statement():
+            self.visit(stmt)
+        return None
+
     def visitIfStmt(self, ctx: PELEParser.IfStmtContext):
         if_ctx = ctx.ifStatement()
-        exprs = if_ctx.expr()   # Lista de todas las condiciones (si y sino)
-        blocks = if_ctx.block() # Lista de todos los bloques de codigo
+        exprs = if_ctx.expr()   
+        blocks = if_ctx.block() 
 
-        # Evaluar la primera condicion (el 'si')
+        # Evaluar la primera condicion SI
         if self.visit(exprs[0]):
             return self.visit(blocks[0])
 
-        # Iterar sobre las condiciones 'sino' (elifs)
-        # Empiezan en el indice 1 hasta el final de las expresiones
+        # Iterar sobre las condiciones SINO
         for i in range(1, len(exprs)):
             if self.visit(exprs[i]):
                 return self.visit(blocks[i])
 
-        # Si ninguna condicion fue verdadera, verificamos si existe el 'entonces' (else)
-        # Sabemos que existe un 'entonces' si hay mas bloques que expresiones
+        # Si ninguna condicion fue verdadera, verificamos ENTONCES
         if len(blocks) > len(exprs):
             return self.visit(blocks[-1])
 
         return None
 
-    # Agrega la logica para el ciclo 'mientras'
     def visitWhileStmt(self, ctx: PELEParser.WhileStmtContext):
         while_ctx = ctx.whileStatement()
-        # En la teoria de compiladores, un interprete tree-walk evalua 
-        # el AST dinamicamente apoyandose en el bucle del lenguaje anfitrion.
         while self.visit(while_ctx.expr()):
             self.visit(while_ctx.block())
         return None
 
-    # Agrega la logica para el ciclo 'por'
     def visitForStmt(self, ctx: PELEParser.ForStmtContext):
         for_ctx = ctx.forStatement()
-        
-        # 1. Inicializacion: ejecutamos la primera asignacion
         self.visit(for_ctx.assignment(0))
         
-        # 2. Condicion: comprobamos la expresion logica
         while self.visit(for_ctx.expr()):
-            # 3. Cuerpo: ejecutamos el bloque de codigo principal
             self.visit(for_ctx.block())
-            
-            # 4. Actualizacion: ejecutamos la segunda asignacion (el paso)
             self.visit(for_ctx.assignment(1))
             
         return None    
@@ -161,21 +148,20 @@ class EvalVisitor(PELEVisitor):
         if ctx.expr():
             args = [self.visit(e) for e in ctx.expr()]
 
-        # 1. Chequear funciones nativas (built-ins)
+        # funciones nativas
         if func_name in self.builtins():
             return self.builtins()[func_name](*args)
 
-        # 2. Chequear funciones de usuario
+        # funciones de usuario
         if func_name in self.user_functions:
             func_ctx = self.user_functions[func_name]
             
-            # Extraer nombres de parametros del AST (ignorando el ID[0] que es el nombre)
             param_names = [param.getText() for param in func_ctx.ID()[1:]]
             
             if len(param_names) != len(args):
                 raise Exception(f"Error: La funcion '{func_name}' espera {len(param_names)} argumentos, recibio {len(args)}.")
             
-            # Crear un nuevo entorno local (Scope)
+            # Crear un nuevo entorno local 
             local_scope = {}
             for i in range(len(param_names)):
                 local_scope[param_names[i]] = args[i]
@@ -189,7 +175,7 @@ class EvalVisitor(PELEVisitor):
             except ReturnValue as ret:
                 return_value = ret.value
             finally:
-                # Salir de la funcion (Pop a la pila, destruye las variables locales)
+                # Salir de la funcion, pop a la pila, destruye las variables locales
                 self.call_stack.pop()
                 
             return return_value
@@ -235,7 +221,6 @@ class EvalVisitor(PELEVisitor):
             "arr_set": self._arr_set,
         }
 
-    # --- Implementaciones de builtins ---
     # Mapas
     def _format_value(self, v):
         # Formatea recursivamente para listas, dicts, sets, árboles y grafos

@@ -28,30 +28,24 @@ statement
     | forStatement               # forStmt
     ;
 
-// Estructura: funcion nombre(a, b) { ... }
 functionDecl
     : 'funcion' ID '(' (ID (',' ID)*)? ')' '{' block '}'
     ;
 
-// Estructura: retornar expr;
 returnStatement
     : 'retornar' expr ';'
     ;
 
-// Estructura: si (cond) { ... } sino (cond) { ... } entonces { ... }
 ifStatement
     : 'si' '(' expr ')' '{' block '}' 
       ('sino' '(' expr ')' '{' block '}')* 
       ('entonces' '{' block '}')?
     ;
 
-// Estructura: mientras (cond) { ... }
 whileStatement
     : 'mientras' '(' expr ')' '{' block '}'
     ;
 
-// Estructura: por (inicializacion; condicion; actualizacion) { ... }
-// Ejemplo: por (i = 0; i < 10; i = i + 1) { ... }
 forStatement
     : 'por' '(' assignment ';' expr ';' assignment ')' '{' block '}'
     ;
