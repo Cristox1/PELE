@@ -1,25 +1,42 @@
 from PELEVisitor import PELEVisitor
 from PELEParser import PELEParser
 
+class ReturnValue(Exception):
+    def __init__(self, value):
+        self.value = value
+
 class EvalVisitor(PELEVisitor):
     def __init__(self):
-        self.memory = {}
+        # self.memory = {}  <-- ELIMINAR LA MEMORIA GLOBAL VIEJA
+        self.call_stack = [{}] # Pila de scopes. El indice 0 es el scope global.
+        self.user_functions = {} # Diccionario para guardar los AST de las funciones
+
+    def _set_var(self, name, value):
+        self.call_stack[-1][name] = value
+
+    def _get_var(self, name):
+        for scope in reversed(self.call_stack):
+            if name in scope:
+                return scope[name]
+        raise Exception(f"Error: Variable '{name}' no definida en este ambito.")
 
     def visitProgram(self, ctx: PELEParser.ProgramContext):
         return self.visit(ctx.block()) 
     
     def visitBlock(self, ctx: PELEParser.BlockContext):
         for stmt in ctx.statement():
-            try:
-                self.visit(stmt)
-            except Exception as e:
-                print(f"Error en statement: {e}")
+            self.visit(stmt)
         return None
 
     def visitAssignStmt(self, ctx: PELEParser.AssignStmtContext):
-        var_name = ctx.assignment().ID().getText()
-        value = self.visit(ctx.assignment().expr())
-        self.memory[var_name] = value
+        # Este maneja: a = 5;
+        return self.visit(ctx.assignment())
+
+    def visitAssignment(self, ctx: PELEParser.AssignmentContext):
+        # Este maneja la logica real de asignacion (usado por AssignStmt y por ForStmt)
+        var_name = ctx.ID().getText()
+        value = self.visit(ctx.expr())
+        self._set_var(var_name, value)
         return value
 
     def visitMostrarStmt(self, ctx: PELEParser.MostrarStmtContext):
@@ -41,7 +58,8 @@ class EvalVisitor(PELEVisitor):
     def visitMulDivModExpr(self, ctx: PELEParser.MulDivModExprContext):
         left = self.visit(ctx.expr(0))
         right = self.visit(ctx.expr(1))
-        op = ctx.op.text
+        # CORRECCION: Obtenemos el operador accediendo al hijo 1 del nodo AST
+        op = ctx.getChild(1).getText() 
         if op == '*': return left * right
         if op == '/': return left / right
         if op == '%': return left % right
@@ -49,8 +67,10 @@ class EvalVisitor(PELEVisitor):
     def visitAddSubExpr(self, ctx: PELEParser.AddSubExprContext):
         left = self.visit(ctx.expr(0))
         right = self.visit(ctx.expr(1))
-        if ctx.op.text == '+': return left + right
-        if ctx.op.text == '-': return left - right
+        # CORRECCION: Obtenemos el operador accediendo al hijo 1 del nodo AST
+        op = ctx.getChild(1).getText() 
+        if op == '+': return left + right
+        if op == '-': return left - right
 
     def visitRelationalExpr(self, ctx: PELEParser.RelationalExprContext):
         left = self.visit(ctx.expr(0))
@@ -81,33 +101,100 @@ class EvalVisitor(PELEVisitor):
 
     def visitIdExpr(self, ctx: PELEParser.IdExprContext):
         var_name = ctx.getText()
-        if var_name in self.memory:
-            return self.memory[var_name]
-        raise Exception(f"Error: Variable '{var_name}' no definida.")
+        return self._get_var(var_name)
 
     def visitParensExpr(self, ctx: PELEParser.ParensExprContext):
         return self.visit(ctx.expr())
     
+    # Reemplaza tu visitIfStmt anterior con este:
     def visitIfStmt(self, ctx: PELEParser.IfStmtContext):
-            condition = self.visit(ctx.ifStatement().expr())
-            if condition:
-                return self.visit(ctx.ifStatement().block(0))
-            elif ctx.ifStatement().block(1):
-                return self.visit(ctx.ifStatement().block(1))
-            return None
-    #
+        if_ctx = ctx.ifStatement()
+        exprs = if_ctx.expr()   # Lista de todas las condiciones (si y sino)
+        blocks = if_ctx.block() # Lista de todos los bloques de codigo
+
+        # Evaluar la primera condicion (el 'si')
+        if self.visit(exprs[0]):
+            return self.visit(blocks[0])
+
+        # Iterar sobre las condiciones 'sino' (elifs)
+        # Empiezan en el indice 1 hasta el final de las expresiones
+        for i in range(1, len(exprs)):
+            if self.visit(exprs[i]):
+                return self.visit(blocks[i])
+
+        # Si ninguna condicion fue verdadera, verificamos si existe el 'entonces' (else)
+        # Sabemos que existe un 'entonces' si hay mas bloques que expresiones
+        if len(blocks) > len(exprs):
+            return self.visit(blocks[-1])
+
+        return None
+
+    # Agrega la logica para el ciclo 'mientras'
+    def visitWhileStmt(self, ctx: PELEParser.WhileStmtContext):
+        while_ctx = ctx.whileStatement()
+        # En la teoria de compiladores, un interprete tree-walk evalua 
+        # el AST dinamicamente apoyandose en el bucle del lenguaje anfitrion.
+        while self.visit(while_ctx.expr()):
+            self.visit(while_ctx.block())
+        return None
+
+    # Agrega la logica para el ciclo 'por'
+    def visitForStmt(self, ctx: PELEParser.ForStmtContext):
+        for_ctx = ctx.forStatement()
+        
+        # 1. Inicializacion: ejecutamos la primera asignacion
+        self.visit(for_ctx.assignment(0))
+        
+        # 2. Condicion: comprobamos la expresion logica
+        while self.visit(for_ctx.expr()):
+            # 3. Cuerpo: ejecutamos el bloque de codigo principal
+            self.visit(for_ctx.block())
+            
+            # 4. Actualizacion: ejecutamos la segunda asignacion (el paso)
+            self.visit(for_ctx.assignment(1))
+            
+        return None    
     #
     def visitFuncCallExpr(self, ctx: PELEParser.FuncCallExprContext):
         func_name = ctx.ID().getText()
-        # obtener args: ctx.expr() devuelve lista de subctx
         args = []
         if ctx.expr():
             args = [self.visit(e) for e in ctx.expr()]
-        # dispatch a funciones internas
+
+        # 1. Chequear funciones nativas (built-ins)
         if func_name in self.builtins():
             return self.builtins()[func_name](*args)
-        else:
-            raise Exception(f"Error: Funcion builtin '{func_name}' no definida.")
+
+        # 2. Chequear funciones de usuario
+        if func_name in self.user_functions:
+            func_ctx = self.user_functions[func_name]
+            
+            # Extraer nombres de parametros del AST (ignorando el ID[0] que es el nombre)
+            param_names = [param.getText() for param in func_ctx.ID()[1:]]
+            
+            if len(param_names) != len(args):
+                raise Exception(f"Error: La funcion '{func_name}' espera {len(param_names)} argumentos, recibio {len(args)}.")
+            
+            # Crear un nuevo entorno local (Scope)
+            local_scope = {}
+            for i in range(len(param_names)):
+                local_scope[param_names[i]] = args[i]
+            
+            # Entrar a la funcion (Push a la pila)
+            self.call_stack.append(local_scope)
+            
+            return_value = None
+            try:
+                self.visit(func_ctx.block())
+            except ReturnValue as ret:
+                return_value = ret.value
+            finally:
+                # Salir de la funcion (Pop a la pila, destruye las variables locales)
+                self.call_stack.pop()
+                
+            return return_value
+
+        raise Exception(f"Error: Funcion '{func_name}' no definida.")
 
     def builtins(self):
         # devuelve un diccionario { 'nombre': function_pointer }
@@ -310,3 +397,16 @@ class EvalVisitor(PELEVisitor):
     def _arr_set(self, arr, idx, val):
         arr[int(idx)] = val
         return None
+    
+
+    def visitFuncDeclStmt(self, ctx: PELEParser.FuncDeclStmtContext):
+        # ID(0) es el nombre de la funcion. Los demas ID(1...) son los parametros.
+        func_name = ctx.functionDecl().ID(0).getText()
+        # Guardamos el nodo AST completo para ejecutarlo cuando llamen a la funcion
+        self.user_functions[func_name] = ctx.functionDecl()
+        return None
+
+    def visitRetStmt(self, ctx: PELEParser.RetStmtContext):
+        value = self.visit(ctx.returnStatement().expr())
+        # Lanzamos la excepcion para romper el flujo y subir el valor
+        raise ReturnValue(value)

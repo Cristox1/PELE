@@ -19,6 +19,16 @@ class PELEVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by PELEParser#funcDeclStmt.
+    def visitFuncDeclStmt(self, ctx:PELEParser.FuncDeclStmtContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PELEParser#retStmt.
+    def visitRetStmt(self, ctx:PELEParser.RetStmtContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by PELEParser#assignStmt.
     def visitAssignStmt(self, ctx:PELEParser.AssignStmtContext):
         return self.visitChildren(ctx)
@@ -39,8 +49,38 @@ class PELEVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by PELEParser#whileStmt.
+    def visitWhileStmt(self, ctx:PELEParser.WhileStmtContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PELEParser#forStmt.
+    def visitForStmt(self, ctx:PELEParser.ForStmtContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PELEParser#functionDecl.
+    def visitFunctionDecl(self, ctx:PELEParser.FunctionDeclContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PELEParser#returnStatement.
+    def visitReturnStatement(self, ctx:PELEParser.ReturnStatementContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by PELEParser#ifStatement.
     def visitIfStatement(self, ctx:PELEParser.IfStatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PELEParser#whileStatement.
+    def visitWhileStatement(self, ctx:PELEParser.WhileStatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PELEParser#forStatement.
+    def visitForStatement(self, ctx:PELEParser.ForStatementContext):
         return self.visitChildren(ctx)
 
 
