@@ -1,53 +1,58 @@
 grammar PELE;
 
-// REGLAS LEXICAS
+// LÉXICOS
 TRUE    : 'true' ;
 FALSE   : 'false' ;
-STRING  : '"' ~["]* '"' ; 
+STRING  : '"' ~["]* '"' ;
+
+SI      : 'si' ;
+SINO    : 'sino' ;
+MOSTRAR : 'mostrar' ;
+MIENTRAS: 'mientras' ;
+POR     : 'por' ;
+FOR     : 'for' ;
+IN      : 'in' ;
+FUNCION : 'funcion' ;
+RETORNAR: 'retornar' ;
+
+// Identificador y números
 ID      : [a-zA-Z_][a-zA-Z0-9_]* ;
 FLOAT   : [0-9]+ '.' [0-9]+ ;
 INT     : [0-9]+ ;
+
+// Espacios y comentarios
 WS      : [ \t\r\n]+ -> skip ;
 COMMENT : '//' ~[\r\n]* -> skip ;
 
-// REGLAS SINTACTICAS
+// SINTÁCTICAS
 program : block EOF ;
 
 block
-    : statement+
+    : statement*
     ;
 
 statement
-    : functionDecl               # funcDeclStmt
-    | returnStatement            # retStmt
-    | assignment ';'             # assignStmt
-    | expr ';'                   # exprStmt
-    | 'mostrar' '(' expr ')' ';' # mostrarStmt
-    | ifStatement                # ifStmt
-    | whileStatement             # whileStmt
-    | forStatement               # forStmt
-    ;
-
-functionDecl
-    : 'funcion' ID '(' (ID (',' ID)*)? ')' '{' block '}'
-    ;
-
-returnStatement
-    : 'retornar' expr ';'
+    : assignment ';'                                       # assignStmt
+    | expr ';'                                             # exprStmt
+    | MOSTRAR '(' expr ')' ';'                             # mostrarStmt
+    | ifStatement                                          # ifStmt
+    | MIENTRAS '(' expr ')' '{' block '}'                  # cicloWhile
+    | POR '(' assignment ';' expr ';' assignment ')' '{' block '}'   # cFor
+    | FOR '(' ID IN expr ')' '{' block '}'                 # forEach
+    | functionDecl                                         # functionDeclStmt
+    | RETORNAR expr ';'                                    # returnStmt
     ;
 
 ifStatement
-    : 'si' '(' expr ')' '{' block '}' 
-      ('sino' '(' expr ')' '{' block '}')* 
-      ('entonces' '{' block '}')?
+    : SI '(' expr ')' '{' block '}' ( SINO '{' block '}' )?
     ;
 
-whileStatement
-    : 'mientras' '(' expr ')' '{' block '}'
+functionDecl
+    : FUNCION ID '(' params? ')' '{' block '}'
     ;
 
-forStatement
-    : 'por' '(' assignment ';' expr ';' assignment ')' '{' block '}'
+params
+    : ID (',' ID)*
     ;
 
 assignment
@@ -55,18 +60,18 @@ assignment
     ;
 
 expr
-    : '-' expr                                          # UnaryMinusExpr
-    | expr '**' expr                                    # PowerExpr
-    | expr ('*' | '/' | '%') expr                       # MulDivModExpr
-    | expr ('+' | '-') expr                             # AddSubExpr
-    | expr ('<' | '<=' | '>' | '>=' | '==' | '!=') expr # RelationalExpr
-    | '[' expr (',' expr)* ']'                          # ArrayExpr
-    | TRUE                                              # BoolExpr
-    | FALSE                                             # BoolExpr
-    | STRING                                            # StringExpr
-    | INT                                               # IntExpr
-    | FLOAT                                             # FloatExpr
-    | ID '(' (expr (',' expr)*)? ')'                    # FuncCallExpr
-    | ID                                                # IdExpr
-    | '(' expr ')'                                      # ParensExpr
+    : '-' expr                                # UnaryMinusExpr
+    | expr '**' expr                          # PowerExpr
+    | expr ('*' | '/' | '%') expr             # MulDivModExpr
+    | expr ('+' | '-') expr                   # AddSubExpr
+    | expr ('<' | '<=' | '>' | '>=' | '==' | '!=') expr   # RelationalExpr
+    | '[' (expr (',' expr)*)? ']'             # ArrayExpr
+    | TRUE                                    # BoolExpr
+    | FALSE                                   # BoolExpr
+    | STRING                                  # StringExpr
+    | INT                                     # IntExpr
+    | FLOAT                                   # FloatExpr
+    | ID '(' (expr (',' expr)*)? ')'          # FuncCallExpr
+    | ID                                      # IdExpr
+    | '(' expr ')'                            # ParensExpr
     ;

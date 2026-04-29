@@ -1,146 +1,151 @@
-// ==========================================
-// SCRIPT DE PRUEBAS DEL LENGUAJE PELE
-// ==========================================
-
-mostrar("===> 1. Ttipos de datos");
+mostrar("===> 1. Tipos de datos básicos");
 texto = "Bienvenido a PELE";
 entero = 42;
 flotante = 3.1416;
 activo = true;
-
-mostrar("Variable de texto:");
-mostrar(texto);
-mostrar("Variable entera:");
-mostrar(entero);
-mostrar("Variable flotante:");
-mostrar(flotante);
-mostrar("Variable booleana:");
-mostrar(activo);
+mostrar("texto:"); mostrar(texto);
+mostrar("entero:"); mostrar(entero);
+mostrar("flotante:"); mostrar(flotante);
+mostrar("booleano:"); mostrar(activo);
 mostrar(" ");
 
-mostrar("===> 2. Operaciones matematicas");
-suma = 10 + 5;
-resta = 20 - 8;
-multiplicacion = 4 * 5;
-division = 100 / 4;
-modulo = 10 % 3;
-potencia = 2 ** 3;
-negativo = -15;
-
-mostrar("Suma (10 + 5):"); 
-mostrar(suma);
-mostrar("Potencia (2 ** 3):"); 
-mostrar(potencia);
-mostrar("Modulo (10 % 3):"); 
-mostrar(modulo);
-mostrar("Numero negativo unario:"); 
-mostrar(negativo);
+mostrar("===> 2. Operaciones aritméticas");
+a = 10 + 5;
+b = 20 - 8;
+c = 4 * 5;
+d = 100 / 4;
+e = 10 % 3;
+f = 2 ** 3;
+g = -15;
+mostrar("10+5 ="); mostrar(a);
+mostrar("2**3 ="); mostrar(f);
+mostrar("10%3 ="); mostrar(e);
+mostrar("negativo ="); mostrar(g);
 mostrar(" ");
 
 mostrar("===> 3. Operadores relacionales");
-mostrar("¿Es 10 mayor que 5?");
-mostrar(10 > 5);
-mostrar("¿Es 10 igual a 10?");
-mostrar(10 == 10);
-mostrar("¿Es 5 diferente de 5?");
-mostrar(5 != 5);
+mostrar("10 > 5 ?"); mostrar(10 > 5);
+mostrar("10 == 10 ?"); mostrar(10 == 10);
+mostrar("5 != 5 ?"); mostrar(5 != 5);
 mostrar(" ");
 
-mostrar("===> 4. Condicionales: Si, Sino, Entonces ");
+mostrar("===> 4. Condicionales (si / sino)");
 valor = 50;
-mostrar("Evaluando la variable valor: 50");
-
+mostrar("valor ="); mostrar(valor);
 si (valor > 50) {
-    mostrar("El valor es mayor que 50");
-} sino (valor == 50) {
-    mostrar("El valor es exactamente 50");
-} entonces {
-    mostrar("El valor es menor a 50 ");
+    mostrar("valor > 50");
+} sino {
+    mostrar("valor <= 50");
 }
 mostrar(" ");
 
-mostrar("===> 5. Ciclo while, contador de 0 mientras que sea menor a 5");
+mostrar("===> 5. Bucle mientras (contador de 0 a 4)");
 contador = 0;
 mientras (contador < 5) {
-    mostrar("Iteracion mientras:");
+    mostrar("mientras iter:");
     mostrar(contador);
     contador = contador + 1;
 }
 mostrar(" ");
 
-mostrar("===> 6. Ciclo for, contador +1 mientras que sea menor a 5");
-por (i = 0; i < 5; i = i + 1) {
-    mostrar("Iteracion por:");
-    mostrar(i);
+mostrar("===> 6a. For-each (for-in)");
+nums = [0,1,2,3,4];
+mostrar("Array nums:"); mostrar(nums);
+for (x in nums) {
+    mostrar("elem for-in:"); mostrar(x);
 }
 mostrar(" ");
 
-mostrar("===> 7. Estructuras de datos");
-
-mostrar("-> Arreglos");
-mi_arreglo = [10, 20, 30];
-mostrar(mi_arreglo);
+mostrar("===> 6b. For estilo C (por)");
+i = 0;
+por (i = 0; i < 5; i = i + 1) {
+    mostrar("por iter:"); mostrar(i);
+}
 mostrar(" ");
 
-mostrar("-> Mapas");
-pares = [["clave1", 100], ["clave2", 200]];
-mapa = crear_mapa(pares);
-mostrar(mapa);
-mostrar("Obtener 'clave1':");
-mostrar(mapa_get(mapa, "clave1"));
+mostrar("===> 7. Arreglos y helpers arr_get/arr_set");
+arr = [10,20,30];
+mostrar("arr inicial:"); mostrar(arr);
+mostrar("arr[1] via arr_get:"); mostrar(arr_get(arr, 1));
+arr_set(arr, 1, 99);
+mostrar("arr tras arr_set(arr,1,99):"); mostrar(arr);
 mostrar(" ");
 
-mostrar("-> Pilas");
-pila = crear_pila();
-pila_push(pila, "primero");
-mostrar(pila);
-pila_push(pila, "segundo");
-mostrar(pila);
-mostrar("Sacando el ultimo elemento de la pila:");
-mostrar(pila_pop(pila));
+mostrar("===> 8. Mapas (crear_mapa, mapa_get, mapa_put, mapa_keys/values)");
+pares = [["a", 1], ["b", 2]];
+m = crear_mapa(pares);
+mostrar("mapa m:"); mostrar(m);
+mostrar("m['a'] ="); mostrar(mapa_get(m, "a"));
+mapa_put(m, "c", 3);
+mostrar("mapa tras put c:"); mostrar(m);
+mostrar("claves:"); mostrar(mapa_keys(m));
+mostrar("valores:"); mostrar(mapa_values(m));
 mostrar(" ");
 
-mostrar("-> Colas");
-cola = crear_cola();
-cola_enqueue(cola, "primero");
-mostrar(cola);
-cola_enqueue(cola, "segundo");
-mostrar(cola);
-mostrar("Sacando el primer elemento de la cola:");
-mostrar(cola_dequeue(cola));
+mostrar("===> 9. Pilas (crear_pila, pila_push, pila_pop)");
+p = crear_pila();
+pila_push(p, 10);
+pila_push(p, 20);
+mostrar("pila:"); mostrar(p);
+mostrar("pop:"); mostrar(pila_pop(p));
+mostrar("pila ahora:"); mostrar(p);
 mostrar(" ");
 
-mostrar("-> Conjuntos ");
-conj = crear_conjunto([1, 1, 2, 3]);
-mostrar(conj);
+mostrar("===> 10. Colas (crear_cola, cola_enqueue, cola_dequeue)");
+q = crear_cola();
+cola_enqueue(q, "x");
+cola_enqueue(q, "y");
+mostrar("cola:"); mostrar(q);
+mostrar("dequeue:"); mostrar(cola_dequeue(q));
+mostrar("cola ahora:"); mostrar(q);
 mostrar(" ");
 
-mostrar("-> Matrices ");
-matriz = crear_matriz(2, 2, 9);
-mostrar("Matriz 2x2 inicializada con 9:");
-mostrar(matriz);
+mostrar("===> 11. Conjuntos (crear_conjunto, conjunto_add, conjunto_contains)");
+s = crear_conjunto([1,1,2,3]);
+mostrar("conjunto s:"); mostrar(s);
+conjunto_add(s, 5);
+mostrar("conjunto tras add 5:"); mostrar(s);
+mostrar("contiene 2?:"); mostrar(conjunto_contains(s, 2));
 mostrar(" ");
 
-mostrar("-> Arboles");
-raiz = crear_arbol("Raiz");
-hijo = crear_arbol("Hijo 1");
-arbol_add_child(raiz, hijo);
-mostrar("Recorrido preorder del arbol:");
-mostrar(arbol_preorder(raiz));
+mostrar("===> 12. Matrices (crear_matriz, mat_get, mat_set)");
+mat = crear_matriz(2, 3, 7);
+mostrar("matriz 2x3 inicializada con 7:"); mostrar(mat);
+mostrar("mat[1][2]:"); mostrar(mat_get(mat, 1, 2));
+mat_set(mat, 0, 1, 42);
+mostrar("mat tras set (0,1)=42:"); mostrar(mat);
 mostrar(" ");
 
-mostrar("-> Grafos ");
-grafo = crear_grafo();
-grafo_add_node(grafo, "NodoA");
-grafo_add_node(grafo, "NodoB");
-grafo_add_edge(grafo, "NodoA", "NodoB");
-mostrar("Vecinos del NodoA:");
-mostrar(grafo_neighbors(grafo, "NodoA"));
+mostrar("===> 13. Árboles (crear_arbol, arbol_add_child, arbol_preorder)");
+root = crear_arbol("raiz");
+c1 = crear_arbol("h1");
+c2 = crear_arbol("h2");
+arbol_add_child(root, c1);
+arbol_add_child(root, c2);
+arbol_add_child(c1, crear_arbol("h1.1"));
+mostrar("preorder raiz:"); mostrar(arbol_preorder(root));
 mostrar(" ");
 
-mostrar("===> 8. Funciones con recursividad");
+mostrar("===> 14. Grafos (crear_grafo, grafo_add_node, grafo_add_edge, grafo_neighbors, grafo_bfs)");
+g = crear_grafo();
+grafo_add_node(g, "A");
+grafo_add_node(g, "B");
+grafo_add_node(g, "C");
+grafo_add_edge(g, "A", "B");
+grafo_add_edge(g, "A", "C");
+mostrar("grafo (adyacencias):"); mostrar(g);
+mostrar("neighbors A:"); mostrar(grafo_neighbors(g, "A"));
+mostrar("BFS desde A:"); mostrar(grafo_bfs(g, "A"));
+mostrar(" ");
 
-mostrar("Factorial de 5:");
+mostrar("===> 15. Errores controlados (demostrar try/except en visitBlock)");
+mostrar("Intentaremos hacer mapa_get sobre un entero (error esperado, no detiene ejecución):");
+mostrar(mapa_get(123, "k"));  // builtin lanzará excepción: queda capturada y se continúa
+mostrar("Si ves esto, el try/except en visitBlock permitió continuar.");
+mostrar(" ");
+
+mostrar("===> 16. Funciones de usuario y recursión: factorial");
+mostrar("Definimos función factorial y la probamos:");
 
 funcion factorial(n) {
     si (n <= 1) {
@@ -149,6 +154,31 @@ funcion factorial(n) {
     retornar n * factorial(n - 1);
 }
 
-resultado_fac = factorial(5);
+mostrar("factorial(0):"); mostrar(factorial(0));
+mostrar("factorial(1):"); mostrar(factorial(1));
+mostrar("factorial(5):"); mostrar(factorial(5));
+mostrar(" ");
 
-mostrar(resultado_fac);
+mostrar("===> 17. Prueba de llamada a función con parámetros y scope local");
+funcion suma_doble(a, b) {
+    c = a + b;
+    retornar c * 2;
+}
+mostrar("suma_doble(3,4):"); mostrar(suma_doble(3,4));
+mostrar("Comprobación de que c no existe fuera de la función (debería fallar de forma controlada):");
+mostrar(c);  // provocará error capturado por visitBlock
+mostrar(" ");
+
+mostrar("===> 18. Pruebas finales y resumen");
+mostrar("Lista final arr:"); mostrar(arr);
+mostrar("Mapa final m:"); mostrar(m);
+mostrar("Pila final p:"); mostrar(p);
+mostrar("Cola final q:"); mostrar(q);
+mostrar("Conjunto final s:"); mostrar(s);
+mostrar("Grafo final g:"); mostrar(g);
+mostrar("Matriz final mat:"); mostrar(mat);
+mostrar("Arbol preorder:"); mostrar(arbol_preorder(root));
+mostrar("factorial(7):"); mostrar(factorial(7));
+mostrar(" ");
+
+mostrar("===> FIN DE PRUEBAS");

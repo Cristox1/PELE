@@ -19,16 +19,6 @@ class PELEVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PELEParser#funcDeclStmt.
-    def visitFuncDeclStmt(self, ctx:PELEParser.FuncDeclStmtContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by PELEParser#retStmt.
-    def visitRetStmt(self, ctx:PELEParser.RetStmtContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by PELEParser#assignStmt.
     def visitAssignStmt(self, ctx:PELEParser.AssignStmtContext):
         return self.visitChildren(ctx)
@@ -49,23 +39,28 @@ class PELEVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PELEParser#whileStmt.
-    def visitWhileStmt(self, ctx:PELEParser.WhileStmtContext):
+    # Visit a parse tree produced by PELEParser#cicloWhile.
+    def visitCicloWhile(self, ctx:PELEParser.CicloWhileContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PELEParser#forStmt.
-    def visitForStmt(self, ctx:PELEParser.ForStmtContext):
+    # Visit a parse tree produced by PELEParser#cFor.
+    def visitCFor(self, ctx:PELEParser.CForContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PELEParser#functionDecl.
-    def visitFunctionDecl(self, ctx:PELEParser.FunctionDeclContext):
+    # Visit a parse tree produced by PELEParser#forEach.
+    def visitForEach(self, ctx:PELEParser.ForEachContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PELEParser#returnStatement.
-    def visitReturnStatement(self, ctx:PELEParser.ReturnStatementContext):
+    # Visit a parse tree produced by PELEParser#functionDeclStmt.
+    def visitFunctionDeclStmt(self, ctx:PELEParser.FunctionDeclStmtContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PELEParser#returnStmt.
+    def visitReturnStmt(self, ctx:PELEParser.ReturnStmtContext):
         return self.visitChildren(ctx)
 
 
@@ -74,13 +69,13 @@ class PELEVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PELEParser#whileStatement.
-    def visitWhileStatement(self, ctx:PELEParser.WhileStatementContext):
+    # Visit a parse tree produced by PELEParser#functionDecl.
+    def visitFunctionDecl(self, ctx:PELEParser.FunctionDeclContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PELEParser#forStatement.
-    def visitForStatement(self, ctx:PELEParser.ForStatementContext):
+    # Visit a parse tree produced by PELEParser#params.
+    def visitParams(self, ctx:PELEParser.ParamsContext):
         return self.visitChildren(ctx)
 
 

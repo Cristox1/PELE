@@ -26,24 +26,6 @@ class PELEListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by PELEParser#funcDeclStmt.
-    def enterFuncDeclStmt(self, ctx:PELEParser.FuncDeclStmtContext):
-        pass
-
-    # Exit a parse tree produced by PELEParser#funcDeclStmt.
-    def exitFuncDeclStmt(self, ctx:PELEParser.FuncDeclStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by PELEParser#retStmt.
-    def enterRetStmt(self, ctx:PELEParser.RetStmtContext):
-        pass
-
-    # Exit a parse tree produced by PELEParser#retStmt.
-    def exitRetStmt(self, ctx:PELEParser.RetStmtContext):
-        pass
-
-
     # Enter a parse tree produced by PELEParser#assignStmt.
     def enterAssignStmt(self, ctx:PELEParser.AssignStmtContext):
         pass
@@ -80,39 +62,48 @@ class PELEListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by PELEParser#whileStmt.
-    def enterWhileStmt(self, ctx:PELEParser.WhileStmtContext):
+    # Enter a parse tree produced by PELEParser#cicloWhile.
+    def enterCicloWhile(self, ctx:PELEParser.CicloWhileContext):
         pass
 
-    # Exit a parse tree produced by PELEParser#whileStmt.
-    def exitWhileStmt(self, ctx:PELEParser.WhileStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by PELEParser#forStmt.
-    def enterForStmt(self, ctx:PELEParser.ForStmtContext):
-        pass
-
-    # Exit a parse tree produced by PELEParser#forStmt.
-    def exitForStmt(self, ctx:PELEParser.ForStmtContext):
+    # Exit a parse tree produced by PELEParser#cicloWhile.
+    def exitCicloWhile(self, ctx:PELEParser.CicloWhileContext):
         pass
 
 
-    # Enter a parse tree produced by PELEParser#functionDecl.
-    def enterFunctionDecl(self, ctx:PELEParser.FunctionDeclContext):
+    # Enter a parse tree produced by PELEParser#cFor.
+    def enterCFor(self, ctx:PELEParser.CForContext):
         pass
 
-    # Exit a parse tree produced by PELEParser#functionDecl.
-    def exitFunctionDecl(self, ctx:PELEParser.FunctionDeclContext):
+    # Exit a parse tree produced by PELEParser#cFor.
+    def exitCFor(self, ctx:PELEParser.CForContext):
         pass
 
 
-    # Enter a parse tree produced by PELEParser#returnStatement.
-    def enterReturnStatement(self, ctx:PELEParser.ReturnStatementContext):
+    # Enter a parse tree produced by PELEParser#forEach.
+    def enterForEach(self, ctx:PELEParser.ForEachContext):
         pass
 
-    # Exit a parse tree produced by PELEParser#returnStatement.
-    def exitReturnStatement(self, ctx:PELEParser.ReturnStatementContext):
+    # Exit a parse tree produced by PELEParser#forEach.
+    def exitForEach(self, ctx:PELEParser.ForEachContext):
+        pass
+
+
+    # Enter a parse tree produced by PELEParser#functionDeclStmt.
+    def enterFunctionDeclStmt(self, ctx:PELEParser.FunctionDeclStmtContext):
+        pass
+
+    # Exit a parse tree produced by PELEParser#functionDeclStmt.
+    def exitFunctionDeclStmt(self, ctx:PELEParser.FunctionDeclStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by PELEParser#returnStmt.
+    def enterReturnStmt(self, ctx:PELEParser.ReturnStmtContext):
+        pass
+
+    # Exit a parse tree produced by PELEParser#returnStmt.
+    def exitReturnStmt(self, ctx:PELEParser.ReturnStmtContext):
         pass
 
 
@@ -125,21 +116,21 @@ class PELEListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by PELEParser#whileStatement.
-    def enterWhileStatement(self, ctx:PELEParser.WhileStatementContext):
+    # Enter a parse tree produced by PELEParser#functionDecl.
+    def enterFunctionDecl(self, ctx:PELEParser.FunctionDeclContext):
         pass
 
-    # Exit a parse tree produced by PELEParser#whileStatement.
-    def exitWhileStatement(self, ctx:PELEParser.WhileStatementContext):
+    # Exit a parse tree produced by PELEParser#functionDecl.
+    def exitFunctionDecl(self, ctx:PELEParser.FunctionDeclContext):
         pass
 
 
-    # Enter a parse tree produced by PELEParser#forStatement.
-    def enterForStatement(self, ctx:PELEParser.ForStatementContext):
+    # Enter a parse tree produced by PELEParser#params.
+    def enterParams(self, ctx:PELEParser.ParamsContext):
         pass
 
-    # Exit a parse tree produced by PELEParser#forStatement.
-    def exitForStatement(self, ctx:PELEParser.ForStatementContext):
+    # Exit a parse tree produced by PELEParser#params.
+    def exitParams(self, ctx:PELEParser.ParamsContext):
         pass
 
 
