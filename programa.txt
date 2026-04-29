@@ -1,152 +1,21 @@
-mostrar("===> 1. Tipos de datos básicos");
-texto = "Bienvenido a PELE";
-entero = 42;
-flotante = 3.1416;
-activo = true;
-mostrar("texto:"); mostrar(texto);
-mostrar("entero:"); mostrar(entero);
-mostrar("flotante:"); mostrar(flotante);
-mostrar("booleano:"); mostrar(activo);
-mostrar(" ");
-
-mostrar("===> 2. Operaciones aritméticas");
-a = 10 + 5;
-b = 20 - 8;
-c = 4 * 5;
-d = 100 / 4;
-e = 10 % 3;
-f = 2 ** 3;
-g = -15;
-mostrar("10+5 ="); mostrar(a);
-mostrar("2**3 ="); mostrar(f);
-mostrar("10%3 ="); mostrar(e);
-mostrar("negativo ="); mostrar(g);
-mostrar(" ");
-
-mostrar("===> 3. Operadores relacionales");
-mostrar("10 > 5 ?"); mostrar(10 > 5);
-mostrar("10 == 10 ?"); mostrar(10 == 10);
-mostrar("5 != 5 ?"); mostrar(5 != 5);
-mostrar(" ");
-
-mostrar("===> 4. Condicionales (si / sino)");
-valor = 50;
-mostrar("valor ="); mostrar(valor);
-si (valor > 50) {
-    mostrar("valor > 50");
-} sino {
-    mostrar("valor <= 50");
+mostrar("=== ALGORITMO 1: EUCLIDES (MCD) ===");
+funcion euclides(a, b) {
+    mientras (b != 0) {
+        residuo = a % b;
+        a = b;
+        b = residuo;
+    }
+    retornar a;
 }
+
+resultado_mcd = euclides(48, 18);
+mostrar("El MCD de 48 y 18 es (debe ser 6):");
+mostrar(resultado_mcd);
 mostrar(" ");
 
-mostrar("===> 5. Bucle mientras (contador de 0 a 4)");
-contador = 0;
-mientras (contador < 5) {
-    mostrar("mientras iter:");
-    mostrar(contador);
-    contador = contador + 1;
-}
-mostrar(" ");
 
-mostrar("===> 6a. For-each (for-in)");
-nums = [0,1,2,3,4];
-mostrar("Array nums:"); mostrar(nums);
-for (x in nums) {
-    mostrar("elem for-in:"); mostrar(x);
-}
-mostrar(" ");
-
-mostrar("===> 6b. For estilo C (por)");
-i = 0;
-por (i = 0; i < 5; i = i + 1) {
-    mostrar("por iter:"); mostrar(i);
-}
-mostrar(" ");
-
-mostrar("===> 7. Arreglos y helpers arr_get/arr_set");
-arr = [10,20,30];
-mostrar("arr inicial:"); mostrar(arr);
-mostrar("arr[1] via arr_get:"); mostrar(arr_get(arr, 1));
-arr_set(arr, 1, 99);
-mostrar("arr tras arr_set(arr,1,99):"); mostrar(arr);
-mostrar(" ");
-
-mostrar("===> 8. Mapas (crear_mapa, mapa_get, mapa_put, mapa_keys/values)");
-pares = [["a", 1], ["b", 2]];
-m = crear_mapa(pares);
-mostrar("mapa m:"); mostrar(m);
-mostrar("m['a'] ="); mostrar(mapa_get(m, "a"));
-mapa_put(m, "c", 3);
-mostrar("mapa tras put c:"); mostrar(m);
-mostrar("claves:"); mostrar(mapa_keys(m));
-mostrar("valores:"); mostrar(mapa_values(m));
-mostrar(" ");
-
-mostrar("===> 9. Pilas (crear_pila, pila_push, pila_pop)");
-p = crear_pila();
-pila_push(p, 10);
-pila_push(p, 20);
-mostrar("pila:"); mostrar(p);
-mostrar("pop:"); mostrar(pila_pop(p));
-mostrar("pila ahora:"); mostrar(p);
-mostrar(" ");
-
-mostrar("===> 10. Colas (crear_cola, cola_enqueue, cola_dequeue)");
-q = crear_cola();
-cola_enqueue(q, "x");
-cola_enqueue(q, "y");
-mostrar("cola:"); mostrar(q);
-mostrar("dequeue:"); mostrar(cola_dequeue(q));
-mostrar("cola ahora:"); mostrar(q);
-mostrar(" ");
-
-mostrar("===> 11. Conjuntos (crear_conjunto, conjunto_add, conjunto_contains)");
-s = crear_conjunto([1,1,2,3]);
-mostrar("conjunto s:"); mostrar(s);
-conjunto_add(s, 5);
-mostrar("conjunto tras add 5:"); mostrar(s);
-mostrar("contiene 2?:"); mostrar(conjunto_contains(s, 2));
-mostrar(" ");
-
-mostrar("===> 12. Matrices (crear_matriz, mat_get, mat_set)");
-mat = crear_matriz(2, 3, 7);
-mostrar("matriz 2x3 inicializada con 7:"); mostrar(mat);
-mostrar("mat[1][2]:"); mostrar(mat_get(mat, 1, 2));
-mat_set(mat, 0, 1, 42);
-mostrar("mat tras set (0,1)=42:"); mostrar(mat);
-mostrar(" ");
-
-mostrar("===> 13. Árboles (crear_arbol, arbol_add_child, arbol_preorder)");
-root = crear_arbol("raiz");
-c1 = crear_arbol("h1");
-c2 = crear_arbol("h2");
-arbol_add_child(root, c1);
-arbol_add_child(root, c2);
-arbol_add_child(c1, crear_arbol("h1.1"));
-mostrar("preorder raiz:"); mostrar(arbol_preorder(root));
-mostrar(" ");
-
-mostrar("===> 14. Grafos (crear_grafo, grafo_add_node, grafo_add_edge, grafo_neighbors, grafo_bfs)");
-g = crear_grafo();
-grafo_add_node(g, "A");
-grafo_add_node(g, "B");
-grafo_add_node(g, "C");
-grafo_add_edge(g, "A", "B");
-grafo_add_edge(g, "A", "C");
-mostrar("grafo (adyacencias):"); mostrar(g);
-mostrar("neighbors A:"); mostrar(grafo_neighbors(g, "A"));
-mostrar("BFS desde A:"); mostrar(grafo_bfs(g, "A"));
-mostrar(" ");
-
-mostrar("===> 15. Errores controlados (demostrar try/except en visitBlock)");
-mostrar("Intentaremos hacer mapa_get sobre un entero (error esperado, no detiene ejecución):");
-mostrar(mapa_get(123, "k"));  // builtin lanzará excepción: queda capturada y se continúa
-mostrar("Si ves esto, el try/except en visitBlock permitió continuar.");
-mostrar(" ");
-
-mostrar("===> 16. Funciones de usuario y recursión: factorial");
-mostrar("Definimos función factorial y la probamos:");
-
+mostrar("=== ALGORITMO 2: SERIE DE TAYLOR (Aproximacion de e^x) ===");
+// Funcion auxiliar necesaria para la formula de Taylor
 funcion factorial(n) {
     si (n <= 1) {
         retornar 1;
@@ -154,31 +23,55 @@ funcion factorial(n) {
     retornar n * factorial(n - 1);
 }
 
-mostrar("factorial(0):"); mostrar(factorial(0));
-mostrar("factorial(1):"); mostrar(factorial(1));
-mostrar("factorial(5):"); mostrar(factorial(5));
-mostrar(" ");
-
-mostrar("===> 17. Prueba de llamada a función con parámetros y scope local");
-funcion suma_doble(a, b) {
-    c = a + b;
-    retornar c * 2;
+funcion exponencial_taylor(x, n) {
+    suma = 0;
+    por (i = 0; i <= n; i = i + 1) {
+        // termino = (x^i) / i!
+        termino = (x ** i) / factorial(i);
+        suma = suma + termino;
+    }
+    retornar suma;
 }
-mostrar("suma_doble(3,4):"); mostrar(suma_doble(3,4));
-mostrar("Comprobación de que c no existe fuera de la función (debería fallar de forma controlada):");
-mostrar(c);  // provocará error capturado por visitBlock
+
+// Vamos a aproximar e^2 (que es aprox 7.389) usando 10 iteraciones
+resultado_taylor = exponencial_taylor(2, 10);
+mostrar("Aproximacion de e^2 con 10 iteraciones:");
+mostrar(resultado_taylor);
 mostrar(" ");
 
-mostrar("===> 18. Pruebas finales y resumen");
-mostrar("Lista final arr:"); mostrar(arr);
-mostrar("Mapa final m:"); mostrar(m);
-mostrar("Pila final p:"); mostrar(p);
-mostrar("Cola final q:"); mostrar(q);
-mostrar("Conjunto final s:"); mostrar(s);
-mostrar("Grafo final g:"); mostrar(g);
-mostrar("Matriz final mat:"); mostrar(mat);
-mostrar("Arbol preorder:"); mostrar(arbol_preorder(root));
-mostrar("factorial(7):"); mostrar(factorial(7));
-mostrar(" ");
 
-mostrar("===> FIN DE PRUEBAS");
+mostrar("=== ALGORITMO 3: ORDENAMIENTO BURBUJA ===");
+// Pasamos 'n' como parametro ya que no tenemos funcion longitud() aun.
+// Usamos arr_get y arr_set que ya existen en los builtins de tu Visitor.
+funcion burbuja(lista, n) {
+    por (i = 0; i < n - 1; i = i + 1) {
+        // En PELE, el limite es n - i - 1 para evitar desbordar el arreglo
+        limite = n - i - 1;
+        por (j = 0; j < limite; j = j + 1) {
+            // Obtenemos lista[j] y lista[j+1]
+            actual = arr_get(lista, j);
+            siguiente = arr_get(lista, j + 1);
+
+            // Si lista[j] > lista[j + 1] -> intercambiar
+            si (actual > siguiente) {
+                arr_set(lista, j, siguiente);
+                arr_set(lista, j + 1, actual);
+            }
+
+            // Mostrar el estado de la lista en cada comparación/intercambio
+            mostrar(lista);
+        }
+    }
+    retornar lista;
+}
+
+mi_lista = [64, 34, 25, 12, 22, 11, 90];
+mostrar("Lista original:");
+mostrar(mi_lista);
+
+// La lista tiene 7 elementos
+lista_ordenada = burbuja(mi_lista, 7);
+
+mostrar("Lista ordenada por burbuja:");
+mostrar(lista_ordenada);
+mostrar(" ");
